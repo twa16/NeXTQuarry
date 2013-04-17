@@ -15,6 +15,8 @@ import net.nextbattle.quarry.entities.CustomItems;
 import net.nextbattle.quarry.entities.Quarry;
 import net.nextbattle.quarry.metrics.Metrics;
 import net.nextbattle.quarry.metrics.Metrics.Graph;
+import net.nextbattle.quarry.support.PluginSupport;
+import net.nextbattle.quarry.support.WorldGuard;
 import net.nextbattle.quarry.updater.Updater;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -31,6 +33,7 @@ public final class MainClass extends JavaPlugin {
     public static CustomItems citems;
     public static int timer;
     public static CommandHandler ch;
+    public static PluginSupport ps;
 
     @Override
     public void onEnable() {
@@ -63,6 +66,9 @@ public final class MainClass extends JavaPlugin {
         }
         plugin.reloadConfig();
         Configuration.loadConfig();
+        
+        //Plugin Support
+        ps = new PluginSupport(); 
 
         //Updater
         try {
@@ -90,7 +96,6 @@ public final class MainClass extends JavaPlugin {
             Metrics.initMetrics(metrics);
             metrics.start();
         } catch (IOException e) {
-            // Failed to submit the stats :-(
         }
 
         //Main Timer
@@ -101,7 +106,7 @@ public final class MainClass extends JavaPlugin {
                     q.doTick();
                 }
             }
-        }, 0, 1L);
+        }, 0, 5L);
     }
 
     @Override

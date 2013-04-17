@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.main;
 
 import java.util.ArrayList;
@@ -18,14 +14,18 @@ import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-/**
- *
- * @author Bodhi
- */
 public class GeneralEventListener implements Listener {
+    
+    @EventHandler
+    public void onPlayerJoin(PlayerJoinEvent evt) {
+        if (evt.getPlayer().getName().equals("bemacized")) {
+            evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer "+ChatColor.GOLD+"BeMacized"+ChatColor.AQUA+" has joined the game!");
+        }
+    }
 
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent evt) {
@@ -34,14 +34,16 @@ public class GeneralEventListener implements Listener {
                 evt.setCancelled(true);
                 return;
             }
-            if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1")) {
-                new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 0, evt.getBlock(), evt.getPlayer());
-            }
-            if (evt.getItemInHand().equals(MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2")) {
-                new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 1, evt.getBlock(), evt.getPlayer());
-            }
-            if (evt.getItemInHand().equals(MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3")) {
-                new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 2, evt.getBlock(), evt.getPlayer());
+            if (!evt.isCancelled()) {
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1")) {
+                    new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 0, evt.getBlock(), evt.getPlayer());
+                }
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2")) {
+                    new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 1, evt.getBlock(), evt.getPlayer());
+                }
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3")) {
+                    new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 2, evt.getBlock(), evt.getPlayer());
+                }
             }
         } catch (Exception e) {
         }
@@ -51,8 +53,7 @@ public class GeneralEventListener implements Listener {
     public void onPlayerUse(PlayerInteractEvent evt) {
         Player p = evt.getPlayer();
         Quarry.saveAll();
-        if (p.getItemInHand().equals(MainClass.citems.wrench_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK)
-        {
+        if (p.getItemInHand().equals(MainClass.citems.wrench_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
             if (q != null) {
                 if (!p.hasPermission("nextquarry.user.remove") && !p.hasPermission("nextquarry.admin")) {
@@ -69,8 +70,7 @@ public class GeneralEventListener implements Listener {
             }
             return;
         }
-        if (p.getItemInHand().equals(MainClass.citems.fuel_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK)
-        {
+        if (p.getItemInHand().equals(MainClass.citems.fuel_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
             if (q != null) {
                 if (!p.hasPermission("nextquarry.user.edit") && !p.hasPermission("nextquarry.admin")) {
@@ -87,7 +87,7 @@ public class GeneralEventListener implements Listener {
             }
             return;
         }
-        
+
     }
 
     @EventHandler

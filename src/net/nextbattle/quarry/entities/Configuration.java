@@ -28,10 +28,12 @@ public class Configuration {
     private boolean privatequarries;
     private boolean autoupdate;
     private boolean updatenotify;
+    private boolean continue_when_unloaded;
+    private boolean continue_when_offline;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
-        MainClass.config = new Configuration(fc.getBoolean("private-quarries"), false, fc.getBoolean("auto-update"), fc.getBoolean("update-notify"));
+        MainClass.config = new Configuration(fc.getBoolean("private-quarries"), false, fc.getBoolean("auto-update"), fc.getBoolean("update-notify"), fc.getBoolean("continue-when-unloaded"), fc.getBoolean("continue-when-offline"));
         List<?> list = fc.getList("ignored-blocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -43,6 +45,14 @@ public class Configuration {
         }
     }
     
+    public boolean getContinue_when_unloaded()
+    {
+        return continue_when_unloaded;
+    }
+    public boolean getContinue_when_offline()
+    {
+        return continue_when_offline;
+    }
     public boolean getAutoUpdate() {
         return autoupdate;
     }
@@ -62,9 +72,11 @@ public class Configuration {
         privatequarries = true;
         autoupdate = false;
         updatenotify = true;
+        continue_when_unloaded = false;
+        continue_when_offline = false;
     }
 
-    public Configuration(boolean privatequarries, boolean default_cantbreak, boolean autoupdate, boolean updatenotify) {
+    public Configuration(boolean privatequarries, boolean default_cantbreak, boolean autoupdate, boolean updatenotify, boolean continue_when_unloaded, boolean continue_when_offline) {
         cantbreak = new ArrayList<Material>();
         this.autoupdate = autoupdate;
         if (default_cantbreak) {
