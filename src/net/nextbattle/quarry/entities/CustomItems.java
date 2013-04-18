@@ -17,6 +17,7 @@ import org.bukkit.inventory.meta.ItemMeta;
  * @author Bodhi
  */
 public class CustomItems {
+
     public ItemStack quarry_tier1;
     public ItemStack quarry_tier2;
     public ItemStack quarry_tier3;
@@ -24,14 +25,14 @@ public class CustomItems {
     public ItemStack wrench_tool;
     public ItemStack fuel_tool;
     public ItemStack fuel_upgrade;
-    //public ItemStack chest_miner; - Planned for v1.2.0 release.
-    
+    public ItemStack chest_miner;
+
     public CustomItems() {
         //Work Vars
         ItemStack is;
         ItemMeta meta;
         ArrayList<String> lorelist;
-        
+
         //Tier 1 Quarry
         is = new ItemStack(Material.IRON_BLOCK, 1);
         meta = is.getItemMeta();
@@ -41,7 +42,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier1 = is;
-        
+
         //Tier 2 Quarry
         is = new ItemStack(Material.GOLD_BLOCK, 1);
         meta = is.getItemMeta();
@@ -51,7 +52,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier2 = is;
-        
+
         //Tier 3 Quarry
         is = new ItemStack(Material.OBSIDIAN, 1);
         meta = is.getItemMeta();
@@ -61,7 +62,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier3 = is;
-        
+
         //Speed Upgrade
         is = new ItemStack(Material.WATCH, 1);
         meta = is.getItemMeta();
@@ -72,7 +73,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         speed_upgrade = is;
-        
+
         //Fuel Finder Upgrade
         is = new ItemStack(Material.TRAP_DOOR, 1);
         meta = is.getItemMeta();
@@ -83,7 +84,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_upgrade = is;
-        
+
         //Wrench Tool
         is = new ItemStack(Material.BLAZE_ROD, 1);
         meta = is.getItemMeta();
@@ -93,7 +94,7 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         wrench_tool = is;
-        
+
         //Fuel Tool
         is = new ItemStack(Material.BUCKET, 1);
         meta = is.getItemMeta();
@@ -103,9 +104,9 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_tool = is;
-        
-        //Chest Miner - Planned for v1.2.0 release.
-        /*is = new ItemStack(Material.GOLD_AXE, 1);
+
+        //Chest Miner
+        is = new ItemStack(Material.GOLD_AXE, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Chest Mining Upgrade");
         lorelist = new ArrayList<String>();
@@ -113,13 +114,13 @@ public class CustomItems {
         lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
-        chest_miner = is;*/
+        chest_miner = is;
     }
-    
+
     public void addRecipes() {
         //Work Variable
         ShapedRecipe recipe;
-        
+
         //Tier 1 Quarry
         recipe = new ShapedRecipe(quarry_tier1);
         recipe.shape("ABA", "ACA", "ADA");
@@ -128,7 +129,7 @@ public class CustomItems {
         recipe.setIngredient('C', Material.HOPPER);
         recipe.setIngredient('D', Material.IRON_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Tier 2 Quarry
         recipe = new ShapedRecipe(quarry_tier2);
         recipe.shape("ABA", "ACA", "ADA");
@@ -137,7 +138,7 @@ public class CustomItems {
         recipe.setIngredient('C', Material.HOPPER);
         recipe.setIngredient('D', Material.GOLD_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Tier 3 Quarry
         recipe = new ShapedRecipe(quarry_tier3);
         recipe.shape("ABA", "ACA", "ADA");
@@ -146,7 +147,7 @@ public class CustomItems {
         recipe.setIngredient('C', Material.HOPPER);
         recipe.setIngredient('D', Material.DIAMOND_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Speed Upgrade
         recipe = new ShapedRecipe(speed_upgrade);
         recipe.shape("ADA", "BCB", "ADA");
@@ -155,7 +156,7 @@ public class CustomItems {
         recipe.setIngredient('C', Material.REDSTONE);
         recipe.setIngredient('D', Material.STRING);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Fuel Finder Upgrade
         recipe = new ShapedRecipe(fuel_upgrade);
         recipe.shape("ABA", "BCB", "ABA");
@@ -163,14 +164,14 @@ public class CustomItems {
         recipe.setIngredient('B', Material.STICK);
         recipe.setIngredient('C', Material.COAL);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Wrench Tool
         recipe = new ShapedRecipe(wrench_tool);
         recipe.shape("B B", " A ", " A ");
         recipe.setIngredient('A', Material.GOLD_INGOT);
         recipe.setIngredient('B', Material.IRON_INGOT);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Fuel Tool
         recipe = new ShapedRecipe(fuel_tool);
         recipe.shape("ABA", "A A", " C ");
@@ -178,14 +179,14 @@ public class CustomItems {
         recipe.setIngredient('B', Material.BUCKET);
         recipe.setIngredient('C', Material.HOPPER);
         Bukkit.getServer().addRecipe(recipe);
-        
-        //Chest Miner upgrade - Planned for v1.2.0 release.
-        /*recipe = new ShapedRecipe(chest_miner);
+
+        //Chest Miner upgrade
+        recipe = new ShapedRecipe(chest_miner);
         recipe.shape(" A ", " B ", " C ");
         recipe.setIngredient('A', Material.REDSTONE);
         recipe.setIngredient('B', Material.GOLD_HOE);
         recipe.setIngredient('C', Material.CHEST);
         Bukkit.getServer().addRecipe(recipe);
-        */
+
     }
 }
