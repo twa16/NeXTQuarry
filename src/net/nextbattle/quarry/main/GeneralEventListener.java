@@ -23,7 +23,9 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent evt) {
         if (evt.getPlayer().getName().equals("bemacized")) {
-            evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer "+ChatColor.GOLD+"BeMacized"+ChatColor.AQUA+" has joined the game!");
+            if (MainClass.config.getDevJoinMsg()) {
+                evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer "+ChatColor.GOLD+"BeMacized"+ChatColor.AQUA+" has joined the game!");
+            }
         }
     }
 

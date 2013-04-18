@@ -30,10 +30,11 @@ public class Configuration {
     private boolean updatenotify;
     private boolean continue_when_unloaded;
     private boolean continue_when_offline;
+    private boolean dev_join_message;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
-        MainClass.config = new Configuration(fc.getBoolean("private-quarries"), false, fc.getBoolean("auto-update"), fc.getBoolean("update-notify"), fc.getBoolean("continue-when-unloaded"), fc.getBoolean("continue-when-offline"));
+        MainClass.config = new Configuration(fc.getBoolean("private-quarries"), false, fc.getBoolean("auto-update"), fc.getBoolean("update-notify"), fc.getBoolean("continue-when-unloaded"), fc.getBoolean("continue-when-offline"), fc.getBoolean("dev-join-message"));
         List<?> list = fc.getList("ignored-blocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -43,6 +44,11 @@ public class Configuration {
                 catch (Exception e) {}
             }
         }
+    }
+    
+    public boolean getDevJoinMsg()
+    {
+        return dev_join_message;
     }
     
     public boolean getContinue_when_unloaded()
@@ -74,9 +80,10 @@ public class Configuration {
         updatenotify = true;
         continue_when_unloaded = false;
         continue_when_offline = false;
+        dev_join_message = true;
     }
 
-    public Configuration(boolean privatequarries, boolean default_cantbreak, boolean autoupdate, boolean updatenotify, boolean continue_when_unloaded, boolean continue_when_offline) {
+    public Configuration(boolean privatequarries, boolean default_cantbreak, boolean autoupdate, boolean updatenotify, boolean continue_when_unloaded, boolean continue_when_offline, boolean dev_join_message) {
         cantbreak = new ArrayList<Material>();
         this.autoupdate = autoupdate;
         if (default_cantbreak) {
@@ -89,6 +96,7 @@ public class Configuration {
         }
         this.privatequarries = privatequarries;
         this.updatenotify = updatenotify;
+        this.dev_join_message = dev_join_message;
     }
 
     public void addCantBreak(Material mat) {

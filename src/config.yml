@@ -27,4 +27,8 @@ continue-when-unloaded: false
 #Continue when offline: If set to false, quarries will not do anything when their owner is offline.
 continue-when-offline: false
 
+# -- MISCELLANEOUS OPTIONS --
+#Dev join message: Shows a custom join message for any developer who joins. Please leave this on.
+dev-join-message: true
+
 

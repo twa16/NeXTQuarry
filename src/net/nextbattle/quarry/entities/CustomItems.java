@@ -24,6 +24,7 @@ public class CustomItems {
     public ItemStack wrench_tool;
     public ItemStack fuel_tool;
     public ItemStack fuel_upgrade;
+    //public ItemStack chest_miner; - Planned for v1.2.0 release.
     
     public CustomItems() {
         //Work Vars
@@ -102,6 +103,17 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_tool = is;
+        
+        //Chest Miner - Planned for v1.2.0 release.
+        /*is = new ItemStack(Material.GOLD_AXE, 1);
+        meta = is.getItemMeta();
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Chest Mining Upgrade");
+        lorelist = new ArrayList<String>();
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Allows you to mine the contents of chests.");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        meta.setLore(lorelist);
+        is.setItemMeta(meta);
+        chest_miner = is;*/
     }
     
     public void addRecipes() {
@@ -166,5 +178,14 @@ public class CustomItems {
         recipe.setIngredient('B', Material.BUCKET);
         recipe.setIngredient('C', Material.HOPPER);
         Bukkit.getServer().addRecipe(recipe);
+        
+        //Chest Miner upgrade - Planned for v1.2.0 release.
+        /*recipe = new ShapedRecipe(chest_miner);
+        recipe.shape(" A ", " B ", " C ");
+        recipe.setIngredient('A', Material.REDSTONE);
+        recipe.setIngredient('B', Material.GOLD_HOE);
+        recipe.setIngredient('C', Material.CHEST);
+        Bukkit.getServer().addRecipe(recipe);
+        */
     }
 }

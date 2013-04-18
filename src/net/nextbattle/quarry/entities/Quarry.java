@@ -431,6 +431,20 @@ public class Quarry {
         if (blockState instanceof Chest && !MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
             Chest chest = (Chest) blockState;
             for (ItemStack is : getBlockAtSpot(xwork, ywork, zwork).getDrops()) {
+                // - Planned for v1.2.0 release.
+                /*if (is.getType().equals(Material.CHEST) && upgr_inv.contains(MainClass.citems.chest_miner)) {
+                    BlockState minecheststate = getBlockAtSpot(xwork, ywork, zwork).getState();
+                    if (minecheststate instanceof Chest && !MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
+                        Chest minechest = (Chest) minecheststate;
+                        for (ItemStack isc : minechest.getBlockInventory().getContents()) {
+                            if (chest.getInventory().firstEmpty() != -1) {
+                                chest.getInventory().addItem(isc);
+                            } else {
+                                return true;
+                            }
+                        }
+                    }
+                }*/
                 if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && upgr_inv.contains(MainClass.citems.fuel_upgrade)) {
                     fuel_inv.addItem(is);
                 } else {
