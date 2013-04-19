@@ -19,6 +19,8 @@ public class PluginSupport {
     public WorldGuard wg;
     public Factions fa;
     public CoreProtect cp;
+    // PLANNED SUPPORT FOR PRISM
+    //public Prism_ pm;
 
     public PluginSupport() {
         init();
@@ -66,12 +68,20 @@ public class PluginSupport {
         } else {
             fa = null;
         }
-        if (Bukkit.getPluginManager().getPlugin("CoreProtext") != null) {
+        if (Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
             cp = new CoreProtect();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] CoreProtect found & Attatched.");
 
         } else {
-            fa = null;
+            cp = null;
         }
+        // PLANNED SUPPORT FOR PRISM
+        /*if (Bukkit.getPluginManager().getPlugin("Prism") != null) {
+            pm = new Prism_();
+            MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Prism found & Attatched.");
+
+        } else {
+            pm = null;
+        }*/
     }
 }

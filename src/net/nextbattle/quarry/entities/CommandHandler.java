@@ -21,7 +21,7 @@ public class CommandHandler implements CommandExecutor {
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] strings) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.0.0 - Coded by BeMacized");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.2.0 - Coded by BeMacized");
             cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
             if (cs instanceof Player) {
                 Player p = (Player) cs;
