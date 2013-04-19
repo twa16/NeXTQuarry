@@ -23,7 +23,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent evt) {
         if (evt.getPlayer().getName().equals("bemacized")) {
-            if (MainClass.config.getDevJoinMsg()) {
+            if (MainClass.config.dev_join_message) {
                 evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer "+ChatColor.GOLD+"BeMacized"+ChatColor.AQUA+" has joined the game!");
             }
         }
@@ -37,13 +37,13 @@ public class GeneralEventListener implements Listener {
                 return;
             }
             if (!evt.isCancelled()) {
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1")) {
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1") && Quarry.userCanPlaceTier(0, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 0, evt.getBlock(), evt.getPlayer());
                 }
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2")) {
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2") && Quarry.userCanPlaceTier(1, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 1, evt.getBlock(), evt.getPlayer());
                 }
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3")) {
+                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3") && Quarry.userCanPlaceTier(2, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 2, evt.getBlock(), evt.getPlayer());
                 }
             }
@@ -62,7 +62,7 @@ public class GeneralEventListener implements Listener {
                     p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
                     return;
                 }
-                if (MainClass.config.getPrivateQuarries()) {
+                if (MainClass.config.privatequarries) {
                     if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
                         p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
                         return;
@@ -79,7 +79,7 @@ public class GeneralEventListener implements Listener {
                     p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
                     return;
                 }
-                if (MainClass.config.getPrivateQuarries()) {
+                if (MainClass.config.privatequarries) {
                     if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
                         p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
                         return;
@@ -103,7 +103,7 @@ public class GeneralEventListener implements Listener {
                     p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to break this quarry!");
                     return;
                 }
-                if (MainClass.config.getPrivateQuarries()) {
+                if (MainClass.config.privatequarries) {
                     if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
                         p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
                         return;

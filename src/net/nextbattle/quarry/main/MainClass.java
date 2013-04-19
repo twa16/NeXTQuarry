@@ -73,10 +73,10 @@ public final class MainClass extends JavaPlugin {
         //Updater
         try {
             Updater updater = null;
-            if (config.getAutoUpdate()) {
+            if (config.autoupdate) {
                 updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.DEFAULT, true); //TODO: NOTIFY UPDATE BUT NO UPDATE FEATURE
                 Updater.updateResultCustom(updater);
-            } else if (config.getUpdateNotify()) {
+            } else if (config.autoupdate) {
                 updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);
                 Updater.updateResultCustom(updater);
             }
@@ -91,7 +91,7 @@ public final class MainClass extends JavaPlugin {
         }
 
         //Plugin Metrics
-        if (config.getSendUsageData()) {
+        if (config.send_usage_data) {
             try {
                 Metrics metrics = new Metrics(this);
                 Metrics.initMetrics(metrics);

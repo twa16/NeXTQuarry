@@ -41,7 +41,7 @@ public class CommandHandler implements CommandExecutor {
                 } else {
                     cs.sendMessage(ChatColor.RED + "You are NOT allowed to place tier 3 quarries.");
                 }
-                if (MainClass.config.getPrivateQuarries()) {
+                if (MainClass.config.privatequarries) {
                     if (p.hasPermission("nextquarry.admin")) {
                         cs.sendMessage(ChatColor.GREEN + "You are allowed to break all quarries.");
                         cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");

@@ -339,14 +339,14 @@ public class Quarry {
     }
 
     public void doTick() {
-        if (!block.getChunk().isLoaded() && !MainClass.config.getContinue_when_unloaded()) {
+        if (!block.getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
             return;
         }
         if (Bukkit.getServer().getPlayer(playername) != null) {
-            if (!Bukkit.getServer().getPlayer(playername).isOnline() && !MainClass.config.getContinue_when_offline()) {
+            if (!Bukkit.getServer().getPlayer(playername).isOnline() && !MainClass.config.continue_when_offline) {
                 return;
             }
-        } else if (!MainClass.config.getContinue_when_offline()) {
+        } else if (!MainClass.config.continue_when_offline) {
             return;
         }
         if (tier == 0) {
@@ -428,12 +428,12 @@ public class Quarry {
         Location loc2 = block.getLocation();
         loc2.add(0, 1, 0);
         BlockState blockState = block.getWorld().getBlockAt(loc2).getState();
-        if (blockState instanceof Chest && !MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
+        if (blockState instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
             Chest chest = (Chest) blockState;
             for (ItemStack is : getBlockAtSpot(xwork, ywork, zwork).getDrops()) {
                 if (is.getType().equals(Material.CHEST) && upgr_inv.contains(MainClass.citems.chest_miner)) {
                     BlockState minecheststate = getBlockAtSpot(xwork, ywork, zwork).getState();
-                    if (minecheststate instanceof Chest && !MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
+                    if (minecheststate instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
                         Chest minechest = (Chest) minecheststate;
                         for (ItemStack isc : minechest.getBlockInventory().getContents()) {
                             if (chest.getInventory().firstEmpty() != -1) {
@@ -455,7 +455,7 @@ public class Quarry {
                 }
             }
         }
-        if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
+        if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                 getBlockAtSpot(xwork, ywork, zwork).setType(Material.AIR);
                 MainClass.ps.logRemoval(playername, getBlockAtSpot(xwork, ywork, zwork).getLocation(), getBlockAtSpot(xwork, ywork, zwork).getTypeId(), getBlockAtSpot(xwork, ywork, zwork).getData());
@@ -469,31 +469,31 @@ public class Quarry {
                 if (ywork == yfinal) {
                     return true;
                 } else {
-                    if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork + 1, zwork).getType())) {
+                    if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork + 1, zwork).getType())) {
                         ywork++;
                     } else {
                         return true;
                     }
                 }
-                if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(0, ywork, zwork).getType())) {
+                if (!MainClass.config.cantbreak.contains(getBlockAtSpot(0, ywork, zwork).getType())) {
                     xwork = 0;
                 } else {
                     return true;
                 }
             } else {
-                if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork + 1, ywork, zwork).getType())) {
+                if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork + 1, ywork, zwork).getType())) {
                     xwork++;
                 } else {
                     return true;
                 }
             }
-            if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, 0).getType())) {
+            if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, 0).getType())) {
                 zwork = 0;
             } else {
                 return true;
             }
         } else {
-            if (!MainClass.config.getCantBreak().contains(getBlockAtSpot(xwork, ywork, zwork + 1).getType())) {
+            if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork + 1).getType())) {
                 zwork++;
             } else {
                 return true;
@@ -1084,6 +1084,35 @@ public class Quarry {
 
     public String getPlayerName() {
         return playername;
+    }
+
+    public static boolean userCanPlaceTier(int tier, String playername) {
+        Player p = Bukkit.getServer().getPlayer(playername);
+        if (p == null) {
+            return false;
+        }
+        if (p.hasPermission("nextquarry.admin")) {
+            return true;
+        }
+        if (quarrylist.size() >= MainClass.config.globalmaxquarries) {
+            return false;
+        }
+        int tierc = 0;
+        for (Quarry q : quarrylist) {
+            if (q.getPlayerName().equals(playername) && q.getTier() == tier) {
+                tierc++;
+            }
+        }
+        if (tier == 0 && tierc >= MainClass.config.maxquarriestier1) {
+            return false;
+        }
+        if (tier == 1 && tierc >= MainClass.config.maxquarriestier2) {
+            return false;
+        }
+        if (tier == 2 && tierc >= MainClass.config.maxquarriestier3) {
+            return false;
+        }
+        return true;
     }
 
     public Quarry delete() {
