@@ -7,6 +7,7 @@ package net.nextbattle.quarry.support;
 import java.util.logging.Level;
 import net.nextbattle.quarry.main.MainClass;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.block.Block;
 
 /**
@@ -17,9 +18,22 @@ public class PluginSupport {
 
     public WorldGuard wg;
     public Factions fa;
+    public CoreProtect cp;
 
     public PluginSupport() {
         init();
+    }
+
+    public void logPlacement(String username, Location loc, int type, byte data) {
+        if (cp != null) {
+            cp.logPlacement(username, loc, type, data);
+        }
+    }
+
+    public void logRemoval(String username, Location loc, int type, byte data) {
+        if (cp != null) {
+            cp.logRemoval(username, loc, type, data);
+        }
     }
 
     public boolean mayEditBlock(Block b, String playername) {
@@ -48,6 +62,13 @@ public class PluginSupport {
         if (Bukkit.getPluginManager().getPlugin("Factions") != null) {
             fa = new Factions();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Factions found & Attatched.");
+
+        } else {
+            fa = null;
+        }
+        if (Bukkit.getPluginManager().getPlugin("CoreProtext") != null) {
+            cp = new CoreProtect();
+            MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] CoreProtect found & Attatched.");
 
         } else {
             fa = null;
