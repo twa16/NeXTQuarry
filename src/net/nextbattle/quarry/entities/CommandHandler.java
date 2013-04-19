@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.entities;
 
 import net.nextbattle.quarry.main.MainClass;
@@ -11,17 +7,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-/**
- *
- * @author Bodhi
- */
 public class CommandHandler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] strings) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.2.0 - Coded by BeMacized");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.2.1 - Coded by BeMacized");
             cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
             if (cs instanceof Player) {
                 Player p = (Player) cs;

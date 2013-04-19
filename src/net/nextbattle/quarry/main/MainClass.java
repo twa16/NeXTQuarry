@@ -37,10 +37,6 @@ public final class MainClass extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        //Initialize Custom Items
-        citems = new CustomItems();
-        citems.addRecipes();
-
         //Define plugin
         plugin = this;
 
@@ -66,7 +62,11 @@ public final class MainClass extends JavaPlugin {
         }
         plugin.reloadConfig();
         Configuration.loadConfig();
-
+        
+         //Initialize Custom Items
+        citems = new CustomItems();
+        citems.addRecipes();
+        
         //Plugin Support
         ps = new PluginSupport();
 
