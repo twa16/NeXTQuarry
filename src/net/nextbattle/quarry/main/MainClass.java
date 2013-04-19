@@ -66,9 +66,9 @@ public final class MainClass extends JavaPlugin {
         }
         plugin.reloadConfig();
         Configuration.loadConfig();
-        
+
         //Plugin Support
-        ps = new PluginSupport(); 
+        ps = new PluginSupport();
 
         //Updater
         try {
@@ -91,11 +91,13 @@ public final class MainClass extends JavaPlugin {
         }
 
         //Plugin Metrics
-        try {
-            Metrics metrics = new Metrics(this);
-            Metrics.initMetrics(metrics);
-            metrics.start();
-        } catch (IOException e) {
+        if (config.getSendUsageData()) {
+            try {
+                Metrics metrics = new Metrics(this);
+                Metrics.initMetrics(metrics);
+                metrics.start();
+            } catch (IOException e) {
+            }
         }
 
         //Main Timer

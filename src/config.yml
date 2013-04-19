@@ -30,5 +30,8 @@ continue-when-offline: false
 # -- MISCELLANEOUS OPTIONS --
 #Dev join message: Shows a custom join message for any developer who joins. Please leave this on.
 dev-join-message: true
+#Send usage data: Sends anonymous usage data about the plugin for statistics to mcstats.org
+#Please leave this on, as it gives us an idea on how much our plugin is used. No personal data is sent.
+send-usage-data: true
 
 
