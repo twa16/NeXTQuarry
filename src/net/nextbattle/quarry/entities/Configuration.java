@@ -18,6 +18,11 @@ public class Configuration {
     private boolean continue_when_offline;
     private boolean dev_join_message;
     private boolean send_usage_data;
+    public Material speed_upgrade = Material.WATCH;
+    public Material wrench_tool = Material.BLAZE_ROD;
+    public Material fuel_tool = Material.BUCKET;
+    public Material fuel_upgrade = Material.TRAP_DOOR;
+    public Material chest_miner = Material.GOLD_AXE;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -31,6 +36,11 @@ public class Configuration {
                 catch (Exception e) {}
             }
         }
+        MainClass.config.speed_upgrade = Material.getMaterial(fc.getInt("speed_upgrade"));
+        MainClass.config.wrench_tool = Material.getMaterial(fc.getInt("wrench_tool"));
+        MainClass.config.fuel_tool = Material.getMaterial(fc.getInt("fuel_tool"));
+        MainClass.config.fuel_upgrade = Material.getMaterial(fc.getInt("fuel_upgrade"));
+        MainClass.config.chest_miner = Material.getMaterial(fc.getInt("chest_miner"));        
     }
     
     public boolean getSendUsageData()

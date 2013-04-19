@@ -5,6 +5,7 @@
 package net.nextbattle.quarry.entities;
 
 import java.util.ArrayList;
+import net.nextbattle.quarry.main.MainClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -64,7 +65,7 @@ public class CustomItems {
         quarry_tier3 = is;
 
         //Speed Upgrade
-        is = new ItemStack(Material.WATCH, 1);
+        is = new ItemStack(MainClass.config.speed_upgrade, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Quarry Speed Upgrade");
         lorelist = new ArrayList<String>();
@@ -75,7 +76,7 @@ public class CustomItems {
         speed_upgrade = is;
 
         //Fuel Finder Upgrade
-        is = new ItemStack(Material.TRAP_DOOR, 1);
+        is = new ItemStack(MainClass.config.fuel_upgrade, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Quarry Fuel Finder");
         lorelist = new ArrayList<String>();
@@ -86,7 +87,7 @@ public class CustomItems {
         fuel_upgrade = is;
 
         //Wrench Tool
-        is = new ItemStack(Material.BLAZE_ROD, 1);
+        is = new ItemStack(MainClass.config.wrench_tool, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + "Quarry Wrench");
         lorelist = new ArrayList<String>();
@@ -96,7 +97,7 @@ public class CustomItems {
         wrench_tool = is;
 
         //Fuel Tool
-        is = new ItemStack(Material.BUCKET, 1);
+        is = new ItemStack(MainClass.config.fuel_tool, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + "Quarry Fuel Injector");
         lorelist = new ArrayList<String>();
@@ -106,7 +107,7 @@ public class CustomItems {
         fuel_tool = is;
 
         //Chest Miner
-        is = new ItemStack(Material.GOLD_AXE, 1);
+        is = new ItemStack(MainClass.config.chest_miner, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Chest Mining Upgrade");
         lorelist = new ArrayList<String>();

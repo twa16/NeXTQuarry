@@ -34,4 +34,13 @@ dev-join-message: true
 #Please leave this on, as it gives us an idea on how much our plugin is used. No personal data is sent.
 send-usage-data: true
 
+# -- ITEM OPTIONS --
+#Assign custom id's to the items specific for this plugin - Quarry blocks are not configurable.
+#These are set to their recommended values. It is highly adviced not to change them.
+#WARNING: If these items are changed, the currently crafted ones won't change to the new items, and will lose their functionality.
+speed_upgrade: 347
+wrench_tool: 369
+fuel_tool: 325
+fuel_upgrade: 96
+chest_miner: 286
 
