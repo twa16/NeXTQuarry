@@ -10,8 +10,36 @@ import org.bukkit.entity.Player;
 public class CommandHandler implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] strings) {
+    public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] args) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
+            if (args.length == 2 && args[0].equals("give")) {
+                if (!(cs instanceof Player)) {
+                    cs.sendMessage("You can't execute this command from the console.");
+                    return false;
+                }
+                Player p = (Player) cs;
+                if (args[1].equals("tier1")) {
+                    p.getInventory().addItem(MainClass.citems.quarry_tier1);
+                } else if (args[1].equals("tier2")) {
+                    p.getInventory().addItem(MainClass.citems.quarry_tier2);
+                } else if (args[1].equals("tier3")) {
+                    p.getInventory().addItem(MainClass.citems.quarry_tier3);
+                } else if (args[1].equals("wrench")) {
+                    p.getInventory().addItem(MainClass.citems.wrench_tool);
+                } else if (args[1].equals("speedupgrade")) {
+                    p.getInventory().addItem(MainClass.citems.speed_upgrade);
+                } else if (args[1].equals("fuelinjector")) {
+                    p.getInventory().addItem(MainClass.citems.fuel_tool);
+                } else if (args[1].equals("fuelfinder")) {
+                    p.getInventory().addItem(MainClass.citems.fuel_upgrade);
+                } else if (args[1].equals("chestminer")) {
+                    p.getInventory().addItem(MainClass.citems.chest_miner);
+                } else {
+                    p.sendMessage(ChatColor.GOLD + "This item does not exist!");
+                }
+                return true;
+            }
+            
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
             cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.3.0 - Coded by BeMacized");
             cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
@@ -63,7 +91,7 @@ public class CommandHandler implements CommandExecutor {
                         cs.sendMessage(ChatColor.RED + "You are NOT allowed to break quarries.");
                     }
                     if (p.hasPermission("nextquarry.user.edit")) {
-                            cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");
+                        cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");
                     } else {
                         cs.sendMessage(ChatColor.RED + "You are NOT allowed to edit quarries.");
                     }
@@ -71,6 +99,7 @@ public class CommandHandler implements CommandExecutor {
             }
             return true;
         }
+
         return true;
     }
 }
