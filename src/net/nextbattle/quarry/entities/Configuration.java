@@ -11,6 +11,7 @@ import org.bukkit.configuration.file.YamlConfiguration;
 public class Configuration {
 
     public ArrayList<Material> cantbreak;
+    public ArrayList<String> world_whitelist;
     public boolean privatequarries;
     public boolean autoupdate;
     public boolean updatenotify;
@@ -18,6 +19,7 @@ public class Configuration {
     public boolean continue_when_offline;
     public boolean dev_join_message;
     public boolean send_usage_data;
+    public boolean world_whitelist_enabled;
     public Material speed_upgrade = Material.WATCH;
     public Material wrench_tool = Material.BLAZE_ROD;
     public Material fuel_tool = Material.BUCKET;
@@ -40,6 +42,17 @@ public class Configuration {
                 catch (Exception e) {}
             }
         }
+       list = fc.getList("world-whitelist");
+       ArrayList<String> worlds = new ArrayList<>();  
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                try {
+                    worlds.add(list.get(i).toString());
+                }
+                catch (Exception e) {}
+            }
+            MainClass.config.world_whitelist = worlds;
+        }
         MainClass.config.speed_upgrade = Material.getMaterial(fc.getInt("speed_upgrade"));
         MainClass.config.wrench_tool = Material.getMaterial(fc.getInt("wrench_tool"));
         MainClass.config.fuel_tool = Material.getMaterial(fc.getInt("fuel_tool"));
@@ -56,6 +69,7 @@ public class Configuration {
         MainClass.config.maxquarriestier1 = fc.getInt("user-max-tier-1-quarries");
         MainClass.config.maxquarriestier2 = fc.getInt("user-max-tier-2-quarries");
         MainClass.config.maxquarriestier3 = fc.getInt("user-max-tier-3-quarries");
+        MainClass.config.world_whitelist_enabled = fc.getBoolean("world-whitelist-enabled");
     }
     
     public Configuration() {

@@ -52,3 +52,9 @@ fuel_tool: 325
 fuel_upgrade: 96
 chest_miner: 286
 
+# -- WORLD OPTIONS --
+#World whitelist enabled: If set to true, quarries will only be placable in worlds listed in the worlds whitelist.
+world-whitelist-enabled: false
+#World whitelist: List all worlds here in which quarries are placable. Only works if it is enabled in the "world-whitelist-enabled" option.
+world-whitelist:
+- 'world'

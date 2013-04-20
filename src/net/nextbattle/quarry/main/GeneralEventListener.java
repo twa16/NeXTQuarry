@@ -34,6 +34,13 @@ public class GeneralEventListener implements Listener {
                 evt.setCancelled(true);
                 return;
             }
+            if (MainClass.config.world_whitelist_enabled) {
+                if (!MainClass.config.world_whitelist.contains(evt.getBlock().getWorld().getName()) && !evt.getPlayer().hasPermission("nextquarry.admin")) {
+                    evt.setCancelled(true);
+                    evt.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place quarries in this world");
+                    return;
+                }
+            }
             if (!evt.isCancelled()) {
                 if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1") && Quarry.userCanPlaceTier(0, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 0, evt.getBlock(), evt.getPlayer());
