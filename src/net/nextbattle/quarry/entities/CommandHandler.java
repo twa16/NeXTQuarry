@@ -14,10 +14,15 @@ public class CommandHandler implements CommandExecutor {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
             if (args.length == 2 && args[0].equals("give")) {
                 if (!(cs instanceof Player)) {
-                    cs.sendMessage("You can't execute this command from the console.");
+                    cs.sendMessage(ChatColor.GOLD + "You can't execute this command from the console.");
                     return false;
                 }
                 Player p = (Player) cs;
+
+                if (!p.hasPermission("nextquarry.admin")) {
+                    cs.sendMessage(ChatColor.GOLD + "You are not allowed to execute this command with the give parameter!");
+                    return true;
+                }
                 if (args[1].equals("tier1")) {
                     p.getInventory().addItem(MainClass.citems.quarry_tier1);
                 } else if (args[1].equals("tier2")) {
@@ -40,7 +45,7 @@ public class CommandHandler implements CommandExecutor {
                 }
                 return true;
             }
-            
+
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
             cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.4.0 - Coded by BeMacized");
             cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
