@@ -190,4 +190,12 @@ public class CustomItems {
         Bukkit.getServer().addRecipe(recipe);
 
     }
+    
+    public static boolean customItemsMatch(ItemStack first, ItemStack second)
+    {
+        if (first.getItemMeta().equals(second.getItemMeta())) {
+            return true;
+        }
+        return false;
+    }
 }

@@ -36,12 +36,13 @@ public class CommandHandler implements CommandExecutor {
                     p.getInventory().addItem(MainClass.citems.chest_miner);
                 } else {
                     p.sendMessage(ChatColor.GOLD + "This item does not exist!");
+                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder & chestminer.");
                 }
                 return true;
             }
             
             cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.3.0 - Coded by BeMacized");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.4.0 - Coded by BeMacized");
             cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
             if (cs instanceof Player) {
                 Player p = (Player) cs;

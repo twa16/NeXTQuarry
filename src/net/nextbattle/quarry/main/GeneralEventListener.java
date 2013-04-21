@@ -1,6 +1,7 @@
 package net.nextbattle.quarry.main;
 
 import java.util.ArrayList;
+import net.nextbattle.quarry.entities.CustomItems;
 import net.nextbattle.quarry.entities.Quarry;
 import net.nextbattle.quarry.functions.WorldFunctions;
 import org.bukkit.Bukkit;
@@ -42,13 +43,13 @@ public class GeneralEventListener implements Listener {
                 }
             }
             if (!evt.isCancelled()) {
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1") && Quarry.userCanPlaceTier(0, evt.getPlayer().getName())) {
+                if (CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier1) && evt.getPlayer().hasPermission("nextquarry.user.tier1") && Quarry.userCanPlaceTier(0, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 0, evt.getBlock(), evt.getPlayer());
                 }
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2") && Quarry.userCanPlaceTier(1, evt.getPlayer().getName())) {
+                if (CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier2) && evt.getPlayer().hasPermission("nextquarry.user.tier2") && Quarry.userCanPlaceTier(1, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 1, evt.getBlock(), evt.getPlayer());
                 }
-                if (evt.getItemInHand().equals(MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3") && Quarry.userCanPlaceTier(2, evt.getPlayer().getName())) {
+                if (CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier3) && evt.getPlayer().hasPermission("nextquarry.user.tier3") && Quarry.userCanPlaceTier(2, evt.getPlayer().getName())) {
                     new Quarry(WorldFunctions.getCardinalDirection(evt.getPlayer()), 2, evt.getBlock(), evt.getPlayer());
                 }
             }
