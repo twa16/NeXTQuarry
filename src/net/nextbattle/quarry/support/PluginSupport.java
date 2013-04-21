@@ -19,6 +19,7 @@ public class PluginSupport {
     public WorldGuard wg;
     public Factions fa;
     public CoreProtect cp;
+    public LogBlock_ lb;
     // PLANNED SUPPORT FOR PRISM
     //public Prism_ pm;
 
@@ -30,11 +31,17 @@ public class PluginSupport {
         if (cp != null) {
             cp.logPlacement(username, loc, type, data);
         }
+        if (lb != null) {
+            lb.logPlacement(username, loc, type, data);
+        }
     }
 
     public void logRemoval(String username, Location loc, int type, byte data) {
         if (cp != null) {
             cp.logRemoval(username, loc, type, data);
+        }
+        if (lb != null) {
+            lb.logRemoval(username, loc, type, data);
         }
     }
 
@@ -74,6 +81,12 @@ public class PluginSupport {
 
         } else {
             cp = null;
+        }
+        if (Bukkit.getPluginManager().getPlugin("LogBlock") != null) {
+            lb = new LogBlock_();
+            MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] LogBlock found & Attatched.");
+        } else {
+            lb = null;
         }
         // PLANNED SUPPORT FOR PRISM
         /*if (Bukkit.getPluginManager().getPlugin("Prism") != null) {

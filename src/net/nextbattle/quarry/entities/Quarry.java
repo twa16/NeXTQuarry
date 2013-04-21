@@ -537,11 +537,9 @@ public class Quarry {
                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                     WorldFunctions.queueBlock(b, Material.AIR.getId(), (byte) 0);
                     MainClass.ps.logRemoval(playername, b.getLocation(), b.getTypeId(), b.getData());
-
                 } else {
                     return;
                 }
-
             }
             ArmBlocks.clear();
         } catch (Exception e) {
