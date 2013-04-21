@@ -34,7 +34,7 @@ update-notify: false
 continue-when-unloaded: false
 #Continue when offline: If set to false, quarries will not do anything when their owner is offline.
 continue-when-offline: false
-#Draw all beams: If set to false, only 1 beam will be drawn for the arm of the quarry. Less esthetics, but less resource intensive.
+#Draw all beams: If set to false, only 1 beam will be drawn for the arm of the quarry. Less aesthetics, but less resource intensive.
 draw-all-beams: true
 
 # -- MISCELLANEOUS OPTIONS --
