@@ -101,7 +101,7 @@ public class Quarry {
             }
         }
         ArrayList<Block> QuarryBlocks_temp = new ArrayList<>();
-        list = fc_temp.getList("armblocks");
+        list = fc_temp.getList("quarryblocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 if (Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]) == null) {
@@ -543,9 +543,7 @@ public class Quarry {
                 }
 
             }
-            for (Block b : ArmBlocks) {
-                ArmBlocks.remove(b);
-            }
+            ArmBlocks.clear();
         } catch (Exception e) {
         }
         //draw actual arm
