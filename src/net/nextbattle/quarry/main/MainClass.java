@@ -34,6 +34,12 @@ public final class MainClass extends JavaPlugin {
     public static int timer;
     public static CommandHandler ch;
     public static PluginSupport ps;
+    
+    public static void main(String[] args) {
+        System.out.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
+        System.out.println("Please place NeXTQuarry.jar (this file) in the plugins directory of your CraftBukkit installation.");
+        System.out.println("You can then use it by launching the Craftbukkit server.");
+    }
 
     @Override
     public void onEnable() {

@@ -388,7 +388,7 @@ public class Quarry {
         //Actions
         if (!buildFrame(true)) {
             if (!mineStep()) {
-                drawarm();
+                drawArm();
             }
         }
         WorldFunctions.processQueue();
@@ -501,11 +501,11 @@ public class Quarry {
                 return true;
             }
         }
-        drawarm();
+        drawArm();
         return true;
     }
 
-    public void drawarm() {
+    public void drawArm() {
         int xvar = xwork;
         int yvar = ywork;
         int zvar = zwork;
@@ -538,7 +538,7 @@ public class Quarry {
                     WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
                     MainClass.ps.logRemoval(playername, b.getLocation(), b.getBlock().getTypeId(), b.getBlock().getData());
                 } else {
-                    return;
+                    continue;
                 }
             }
             ArmBlocks.clear();
@@ -553,7 +553,7 @@ public class Quarry {
                         Location loc = new Location(world, block.getX() - x - 1, block.getY() + (5 - y), block.getZ() + z + 2);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                if ((!MainClass.config.draw_all_beams && z != zvar) || (MainClass.config.draw_all_beams)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
                                     ArmBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
@@ -619,7 +619,7 @@ public class Quarry {
                         Location loc = new Location(world, block.getX() - 2 - x, block.getY() + (5 - y), block.getZ() - z - 1);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                if ((!MainClass.config.draw_all_beams && z != zvar) || (MainClass.config.draw_all_beams)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
                                     ArmBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
@@ -684,7 +684,7 @@ public class Quarry {
                         Location loc = new Location(world, x + block.getX() + 1, block.getY() + (5 - y), block.getZ() - z - 2);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                if ((!MainClass.config.draw_all_beams && z != zvar) || (MainClass.config.draw_all_beams)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
                                     ArmBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
@@ -749,7 +749,7 @@ public class Quarry {
                         Location loc = new Location(world, x + block.getX() + 2, block.getY() + (5 - y), block.getZ() + z + 1);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                if ((!MainClass.config.draw_all_beams && z != zvar) || (MainClass.config.draw_all_beams)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
                                     ArmBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
@@ -858,7 +858,7 @@ public class Quarry {
                     for (int y = 0; y < 6; y++) {
                         Location loc = new Location(world, block.getX() - 1 - x, block.getY() + y, block.getZ() - z);
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.AIR) && !world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && !world.getBlockAt(loc).getType().equals(Material.CAULDRON) && !world.getBlockAt(loc).getType().equals(Material.HOPPER) && !world.getBlockAt(loc).getType().equals(Material.IRON_BLOCK)) {
                             if (edit) {
@@ -875,7 +875,7 @@ public class Quarry {
                         }
                         int max = holesize + 1;
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && (((y == 0 || y == 5) && (x == 0 || z == 0 || z == max || x == max)) || ((x == 0 && z == 0) || (x == 0 && z == max) || (x == max && z == 0) || (x == max && z == max)))) {
 
@@ -913,7 +913,7 @@ public class Quarry {
                     for (int y = 0; y < 6; y++) {
                         Location loc = new Location(world, x + block.getX(), block.getY() + y, block.getZ() - z - 1);
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                           continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.AIR) && !world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && !world.getBlockAt(loc).getType().equals(Material.CAULDRON) && !world.getBlockAt(loc).getType().equals(Material.HOPPER) && !world.getBlockAt(loc).getType().equals(Material.IRON_BLOCK)) {
 
@@ -931,7 +931,7 @@ public class Quarry {
                         }
                         int max = holesize + 1;
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && (((y == 0 || y == 5) && (x == 0 || z == 0 || z == max || x == max)) || ((x == 0 && z == 0) || (x == 0 && z == max) || (x == max && z == 0) || (x == max && z == max)))) {
 
@@ -969,7 +969,7 @@ public class Quarry {
                     for (int y = 0; y < 6; y++) {
                         Location loc = new Location(world, x + block.getX() + 1, block.getY() + y, block.getZ() + z);
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.AIR) && !world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && !world.getBlockAt(loc).getType().equals(Material.CAULDRON) && !world.getBlockAt(loc).getType().equals(Material.HOPPER) && !world.getBlockAt(loc).getType().equals(Material.IRON_BLOCK)) {
 
@@ -987,7 +987,7 @@ public class Quarry {
                         }
                         int max = holesize + 1;
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && (((y == 0 || y == 5) && (x == 0 || z == 0 || z == max || x == max)) || ((x == 0 && z == 0) || (x == 0 && z == max) || (x == max && z == 0) || (x == max && z == max)))) {
 
@@ -1025,7 +1025,7 @@ public class Quarry {
                     for (int y = 0; y < 6; y++) {
                         Location loc = new Location(world, block.getX() - x, block.getY() + y, block.getZ() + z + 1);
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.AIR) && !world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && !world.getBlockAt(loc).getType().equals(Material.CAULDRON) && !world.getBlockAt(loc).getType().equals(Material.HOPPER) && !world.getBlockAt(loc).getType().equals(Material.IRON_BLOCK)) {
 
@@ -1043,7 +1043,7 @@ public class Quarry {
                         }
                         int max = holesize + 1;
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                            return true;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && (((y == 0 || y == 5) && (x == 0 || z == 0 || z == max || x == max)) || ((x == 0 && z == 0) || (x == 0 && z == max) || (x == max && z == 0) || (x == max && z == max)))) {
 
