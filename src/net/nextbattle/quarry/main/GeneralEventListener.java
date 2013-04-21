@@ -36,7 +36,7 @@ public class GeneralEventListener implements Listener {
                 return;
             }
             if (MainClass.config.world_whitelist_enabled) {
-                if (!MainClass.config.world_whitelist.contains(evt.getBlock().getWorld().getName()) && !evt.getPlayer().hasPermission("nextquarry.admin")) {
+                if (!MainClass.config.world_whitelist.contains(evt.getBlock().getWorld().getName()) && !evt.getPlayer().hasPermission("nextquarry.admin") && (CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier1) || CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier2) || CustomItems.customItemsMatch(evt.getItemInHand(), MainClass.citems.quarry_tier3))) {
                     evt.setCancelled(true);
                     evt.getPlayer().sendMessage(ChatColor.RED + "You are not allowed to place quarries in this world");
                     return;
