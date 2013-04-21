@@ -8,6 +8,7 @@ import java.util.logging.Level;
 import net.nextbattle.quarry.functions.StringFunctions;
 import net.nextbattle.quarry.functions.WorldFunctions;
 import net.nextbattle.quarry.main.MainClass;
+import net.nextbattle.quarry.types.BlockLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,10 +28,10 @@ public class Quarry {
     public static ArrayList<Quarry> quarrylist = new ArrayList<>();
     private BlockFace dir;
     private int tier;
-    private Block block;
+    private BlockLocation block;
     private String playername;
-    private ArrayList<Block> QuarryBlocks;
-    private ArrayList<Block> ArmBlocks;
+    private ArrayList<BlockLocation> QuarryBlocks;
+    private ArrayList<BlockLocation> ArmBlocks;
     private int xwork = 0;
     private int ywork = 0;
     private int zwork = 0;
@@ -89,7 +90,7 @@ public class Quarry {
         int nextTick_temp = fc_temp.getInt("nextTick");
         int fuelcounter_temp = fc_temp.getInt("fuelcounter");
 
-        ArrayList<Block> ArmBlocks_temp = new ArrayList<>();
+        ArrayList<BlockLocation> ArmBlocks_temp = new ArrayList<>();
         list = fc_temp.getList("armblocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -97,10 +98,10 @@ public class Quarry {
                     loadfile.delete();
                     return;
                 }
-                ArmBlocks_temp.add(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]), Integer.parseInt(list.get(i).toString().split("\\$")[1]), Integer.parseInt(list.get(i).toString().split("\\$")[2]), Integer.parseInt(list.get(i).toString().split("\\$")[3]))));
+                ArmBlocks_temp.add(new BlockLocation(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]), Integer.parseInt(list.get(i).toString().split("\\$")[1]), Integer.parseInt(list.get(i).toString().split("\\$")[2]), Integer.parseInt(list.get(i).toString().split("\\$")[3])))));
             }
         }
-        ArrayList<Block> QuarryBlocks_temp = new ArrayList<>();
+        ArrayList<BlockLocation> QuarryBlocks_temp = new ArrayList<>();
         list = fc_temp.getList("quarryblocks");
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
@@ -108,14 +109,14 @@ public class Quarry {
                     loadfile.delete();
                     return;
                 }
-                QuarryBlocks_temp.add(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]), Integer.parseInt(list.get(i).toString().split("\\$")[1]), Integer.parseInt(list.get(i).toString().split("\\$")[2]), Integer.parseInt(list.get(i).toString().split("\\$")[3]))));
+                QuarryBlocks_temp.add(new BlockLocation(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(list.get(i).toString().split("\\$")[0]), Integer.parseInt(list.get(i).toString().split("\\$")[1]), Integer.parseInt(list.get(i).toString().split("\\$")[2]), Integer.parseInt(list.get(i).toString().split("\\$")[3])))));
             }
         }
         Block block_temp = null;
         String block_serialized = fc_temp.getString("block");
         block_temp = Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]), Integer.parseInt(block_serialized.split("\\$")[1]), Integer.parseInt(block_serialized.split("\\$")[2]), Integer.parseInt(block_serialized.split("\\$")[3])));
-
-        Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, loadfile.getName().replace(".nxtb", ""));
+        BlockLocation block_temp_loc = new BlockLocation(block_temp);
+        Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, loadfile.getName().replace(".nxtb", ""));
     }
 
     public void save() throws IOException {
@@ -125,17 +126,16 @@ public class Quarry {
 
         //Block Registers
         List<String> quarry_blocks_serialized = new ArrayList<>();
-        for (Block b : QuarryBlocks) {
-            quarry_blocks_serialized.add(b.getLocation().getWorld().getName() + "$" + b.getLocation().getBlockX() + "$" + b.getLocation().getBlockY() + "$" + b.getLocation().getBlockZ());
+        for (BlockLocation b : QuarryBlocks) {
+            quarry_blocks_serialized.add(b.getWorld().getName() + "$" + b.getX() + "$" + b.getY() + "$" + b.getZ());
         }
         fc.set("quarryblocks", quarry_blocks_serialized);
         List<String> arm_blocks_serialized = new ArrayList<>();
-        for (Block b : ArmBlocks) {
-            arm_blocks_serialized.add(b.getLocation().getWorld().getName() + "$" + b.getLocation().getBlockX() + "$" + b.getLocation().getBlockY() + "$" + b.getLocation().getBlockZ());
+        for (BlockLocation b : ArmBlocks) {
+            arm_blocks_serialized.add(b.getWorld().getName() + "$" + b.getX() + "$" + b.getY() + "$" + b.getZ());
         }
         fc.set("armblocks", arm_blocks_serialized);
-        Block b = block;
-        fc.set("block", b.getLocation().getWorld().getName() + "$" + b.getLocation().getBlockX() + "$" + b.getLocation().getBlockY() + "$" + b.getLocation().getBlockZ());
+        fc.set("block", block.getWorld().getName() + "$" + block.getX() + "$" + block.getY() + "$" + block.getZ());
 
         //Position Work Variables
         fc.set("xwork", xwork);
@@ -176,7 +176,7 @@ public class Quarry {
     public Quarry(BlockFace dir, int tier, Block b, Player p) {
         this.dir = dir;
         this.tier = tier;
-        this.block = b;
+        this.block = new BlockLocation(b);
         this.playername = p.getName();
         QuarryBlocks = new ArrayList<>();
         ArmBlocks = new ArrayList<>();
@@ -187,7 +187,7 @@ public class Quarry {
         newFile();
     }
 
-    public Quarry(Inventory fuel_inv, Inventory upgr_inv, BlockFace dir, int tier, Block block, String playername, ArrayList<Block> ArmBlocks, ArrayList<Block> QuarryBlocks, int xwork, int ywork, int zwork, int xrealwork, int yrealwork, int zrealwork, boolean active, int fuelcounter, int nextTick, String random_id) {
+    public Quarry(Inventory fuel_inv, Inventory upgr_inv, BlockFace dir, int tier, BlockLocation block, String playername, ArrayList<BlockLocation> ArmBlocks, ArrayList<BlockLocation> QuarryBlocks, int xwork, int ywork, int zwork, int xrealwork, int yrealwork, int zrealwork, boolean active, int fuelcounter, int nextTick, String random_id) {
         this.fuel_inv = fuel_inv;
         this.upgr_inv = upgr_inv;
         this.dir = dir;
@@ -294,7 +294,7 @@ public class Quarry {
     public static Quarry isActualQuarry(Block b) {
         try {
             for (Quarry q : quarrylist) {
-                if (q.block.getLocation().equals(b.getLocation())) {
+                if (q.block.equals(new BlockLocation(b))) {
                     return q;
                 }
             }
@@ -325,22 +325,22 @@ public class Quarry {
     }
 
     public void addQuarryBlock(Block b) {
-        QuarryBlocks.add(b);
+        QuarryBlocks.add(new BlockLocation(b));
     }
 
     public void removeQuarryBlock(Block b) {
-        QuarryBlocks.remove(b);
+        QuarryBlocks.remove(new BlockLocation(b));
     }
 
     public boolean isQuarryBlock(Block b) {
-        if (QuarryBlocks.contains(b)) {
+        if (QuarryBlocks.contains(new BlockLocation(b))) {
             return true;
         }
         return false;
     }
 
     public void doTick() {
-        if (!block.getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
+        if (!block.getBlock().getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
             return;
         }
         if (Bukkit.getServer().getPlayer(playername) != null) {
@@ -351,13 +351,13 @@ public class Quarry {
             return;
         }
         if (tier == 0) {
-            WorldFunctions.queueBlock(block, Material.IRON_BLOCK.getId(), (byte) 0);
+            WorldFunctions.queueBlock(block.getBlock(), Material.IRON_BLOCK.getId(), (byte) 0);
         }
         if (tier == 1) {
-            WorldFunctions.queueBlock(block, Material.GOLD_BLOCK.getId(), (byte) 0);
+            WorldFunctions.queueBlock(block.getBlock(), Material.GOLD_BLOCK.getId(), (byte) 0);
         }
         if (tier == 2) {
-            WorldFunctions.queueBlock(block, Material.OBSIDIAN.getId(), (byte) 0);
+            WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
         }
         if (!cantick) {
             return;
@@ -533,10 +533,10 @@ public class Quarry {
         zrealwork = zwork;
         //remove old arm.
         try {
-            for (Block b : ArmBlocks) {
+            for (BlockLocation b : ArmBlocks) {
                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                    WorldFunctions.queueBlock(b, Material.AIR.getId(), (byte) 0);
-                    MainClass.ps.logRemoval(playername, b.getLocation(), b.getTypeId(), b.getData());
+                    WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
+                    MainClass.ps.logRemoval(playername, b.getLocation(), b.getBlock().getTypeId(), b.getBlock().getData());
                 } else {
                     return;
                 }
@@ -553,10 +553,11 @@ public class Quarry {
                         Location loc = new Location(world, block.getX() - x - 1, block.getY() + (5 - y), block.getZ() + z + 2);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
-                                MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
-
+                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                    WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
+                                    ArmBlocks.add(new BlockLocation(loc));
+                                    MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+                                }
                             } else {
                                 return;
                             }
@@ -565,7 +566,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == 0) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.IRON_BLOCK.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -576,7 +577,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -587,7 +588,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 5)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.HOPPER.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -599,7 +600,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.CAULDRON.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -618,10 +619,11 @@ public class Quarry {
                         Location loc = new Location(world, block.getX() - 2 - x, block.getY() + (5 - y), block.getZ() - z - 1);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
-                                MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
-
+                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                    WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
+                                    ArmBlocks.add(new BlockLocation(loc));
+                                    MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+                                }
                             } else {
                                 return;
                             }
@@ -630,7 +632,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == 0) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.IRON_BLOCK.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -641,7 +643,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -652,7 +654,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 5)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.HOPPER.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -663,7 +665,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.CAULDRON.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -682,10 +684,11 @@ public class Quarry {
                         Location loc = new Location(world, x + block.getX() + 1, block.getY() + (5 - y), block.getZ() - z - 2);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
-                                MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
-
+                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                    WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
+                                    ArmBlocks.add(new BlockLocation(loc));
+                                    MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+                                }
                             } else {
                                 return;
                             }
@@ -694,7 +697,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == 0) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.IRON_BLOCK.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -705,7 +708,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -716,7 +719,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 5)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.HOPPER.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -727,7 +730,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.CAULDRON.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -746,10 +749,11 @@ public class Quarry {
                         Location loc = new Location(world, x + block.getX() + 2, block.getY() + (5 - y), block.getZ() + z + 1);
                         if ((x == xvar || z == zvar) && y == 0 && !(x == xvar && z == zvar)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
-                                WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
-                                MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
-
+                                if (!MainClass.config.draw_all_beams && z == zvar) {
+                                    WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
+                                    ArmBlocks.add(new BlockLocation(loc));
+                                    MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
+                                }
                             } else {
                                 return;
                             }
@@ -758,7 +762,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == 0) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.IRON_BLOCK.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -769,7 +773,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y != 0 && y != (yvar + 5) && y != (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -780,7 +784,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 5)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.HOPPER.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -791,7 +795,7 @@ public class Quarry {
                         if (x == xvar && z == zvar && y == (yvar + 4)) {
                             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                 WorldFunctions.queueBlock(world.getBlockAt(loc), Material.CAULDRON.getId(), (byte) 0);
-                                ArmBlocks.add(world.getBlockAt(loc));
+                                ArmBlocks.add(new BlockLocation(loc));
                                 MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                             } else {
@@ -818,19 +822,19 @@ public class Quarry {
     public boolean containsBlock(Block b) {
         boolean contains = false;
         try {
-            for (Block f : QuarryBlocks) {
-                if (f.getLocation() == b.getLocation()) {
+            for (BlockLocation f : QuarryBlocks) {
+                if (f.equals(new BlockLocation(b))) {
                     contains = true;
                 }
             }
-            for (Block f : ArmBlocks) {
-                if (f.getLocation() == b.getLocation()) {
+            for (BlockLocation f : ArmBlocks) {
+                if (f.equals(new BlockLocation(b))) {
                     contains = true;
                 }
             }
         } catch (Exception e) {
         }
-        if (block.getLocation() == b.getLocation()) {
+        if (block.equals(new BlockLocation(b))) {
             contains = true;
         }
         return contains;
@@ -878,7 +882,7 @@ public class Quarry {
                             if (edit) {
                                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                    QuarryBlocks.add(world.getBlockAt(loc));
+                                    QuarryBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                                 } else {
@@ -934,7 +938,7 @@ public class Quarry {
                             if (edit) {
                                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                    QuarryBlocks.add(world.getBlockAt(loc));
+                                    QuarryBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                                 } else {
@@ -990,7 +994,7 @@ public class Quarry {
                             if (edit) {
                                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                    QuarryBlocks.add(world.getBlockAt(loc));
+                                    QuarryBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                                 } else {
@@ -1046,7 +1050,7 @@ public class Quarry {
                             if (edit) {
                                 if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                                     WorldFunctions.queueBlock(world.getBlockAt(loc), Material.COBBLE_WALL.getId(), (byte) 0);
-                                    QuarryBlocks.add(world.getBlockAt(loc));
+                                    QuarryBlocks.add(new BlockLocation(loc));
                                     MainClass.ps.logPlacement(playername, world.getBlockAt(loc).getLocation(), world.getBlockAt(loc).getTypeId(), world.getBlockAt(loc).getData());
 
                                 } else {
@@ -1065,7 +1069,7 @@ public class Quarry {
         if (!block.getWorld().getBlockAt(loc2).getType().equals(Material.CHEST)) {
             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                 WorldFunctions.queueBlock(block.getWorld().getBlockAt(loc2), Material.CHEST.getId(), (byte) 0);
-                QuarryBlocks.add(block.getWorld().getBlockAt(loc2));
+                QuarryBlocks.add(new BlockLocation(loc2));
                 MainClass.ps.logPlacement(playername, block.getWorld().getBlockAt(loc2).getLocation(), block.getWorld().getBlockAt(loc2).getTypeId(), block.getWorld().getBlockAt(loc2).getData());
 
             } else {
@@ -1117,11 +1121,11 @@ public class Quarry {
         cantick = false;
         quarrylist.remove(this);
         try {
-            for (Block b : QuarryBlocks) {
-                WorldFunctions.queueBlock(b, Material.AIR.getId(), (byte) 0);
+            for (BlockLocation b : QuarryBlocks) {
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
             }
-            for (Block b : ArmBlocks) {
-                WorldFunctions.queueBlock(b, Material.AIR.getId(), (byte) 0);
+            for (BlockLocation b : ArmBlocks) {
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         } catch (Exception e) {
         }

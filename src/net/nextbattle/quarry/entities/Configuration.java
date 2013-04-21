@@ -20,6 +20,7 @@ public class Configuration {
     public boolean dev_join_message;
     public boolean send_usage_data;
     public boolean world_whitelist_enabled;
+    public boolean draw_all_beams;
     public Material speed_upgrade = Material.WATCH;
     public Material wrench_tool = Material.BLAZE_ROD;
     public Material fuel_tool = Material.BUCKET;
@@ -37,19 +38,19 @@ public class Configuration {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 try {
-                MainClass.config.addCantBreak(Material.getMaterial(Integer.parseInt(list.get(i).toString())));
+                    MainClass.config.addCantBreak(Material.getMaterial(Integer.parseInt(list.get(i).toString())));
+                } catch (Exception e) {
                 }
-                catch (Exception e) {}
             }
         }
-       list = fc.getList("world-whitelist");
-       ArrayList<String> worlds = new ArrayList<>();  
+        list = fc.getList("world-whitelist");
+        ArrayList<String> worlds = new ArrayList<>();
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
                 try {
                     worlds.add(list.get(i).toString());
+                } catch (Exception e) {
                 }
-                catch (Exception e) {}
             }
             MainClass.config.world_whitelist = worlds;
         }
@@ -57,7 +58,7 @@ public class Configuration {
         MainClass.config.wrench_tool = Material.getMaterial(fc.getInt("wrench_tool"));
         MainClass.config.fuel_tool = Material.getMaterial(fc.getInt("fuel_tool"));
         MainClass.config.fuel_upgrade = Material.getMaterial(fc.getInt("fuel_upgrade"));
-        MainClass.config.chest_miner = Material.getMaterial(fc.getInt("chest_miner"));        
+        MainClass.config.chest_miner = Material.getMaterial(fc.getInt("chest_miner"));
         MainClass.config.privatequarries = fc.getBoolean("private-quarries");
         MainClass.config.autoupdate = fc.getBoolean("auto-update");
         MainClass.config.updatenotify = fc.getBoolean("update-notify");
@@ -70,8 +71,10 @@ public class Configuration {
         MainClass.config.maxquarriestier2 = fc.getInt("user-max-tier-2-quarries");
         MainClass.config.maxquarriestier3 = fc.getInt("user-max-tier-3-quarries");
         MainClass.config.world_whitelist_enabled = fc.getBoolean("world-whitelist-enabled");
+        MainClass.config.draw_all_beams = fc.getBoolean("draw-all-beams");
+
     }
-    
+
     public Configuration() {
         cantbreak = new ArrayList<>();
         cantbreak.add(Material.BEDROCK);
