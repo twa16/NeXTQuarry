@@ -1099,6 +1099,15 @@ public class Quarry {
         if (quarrylist.size() >= MainClass.config.globalmaxquarries) {
             return false;
         }
+        int quarries = 0;
+        for (Quarry q : quarrylist) {
+            if (q.getPlayerName().equals(playername)) {
+                quarries++;
+            }
+        }
+        if (quarries >= MainClass.config.user_max_quarries) {
+            return false;
+        }
         int tierc = 0;
         for (Quarry q : quarrylist) {
             if (q.getPlayerName().equals(playername) && q.getTier() == tier) {

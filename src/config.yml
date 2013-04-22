@@ -15,12 +15,14 @@ ignored-blocks:
 - '10'
 #Global Max Quarries: The maximum amount of quarries in the whole server (nextquarry.admin bypasses this feature)
 global-max-quarries: 256
-#User max tier 1 quarryes: The maximum amount of tier 1 quarries a user can have (nextquarry.admin bypasses this feature)
+#User max tier 1 quarries: The maximum amount of tier 1 quarries a user can have (nextquarry.admin bypasses this feature)
 user-max-tier-1-quarries: 8
-#User max tier 2 quarryes: The maximum amount of tier 2 quarries a user can have (nextquarry.admin bypasses this feature)
+#User max tier 2 quarries: The maximum amount of tier 2 quarries a user can have (nextquarry.admin bypasses this feature)
 user-max-tier-2-quarries: 8
-#User max tier 3 quarryes: The maximum amount of tier 3 quarries a user can have (nextquarry.admin bypasses this feature)
+#User max tier 3 quarries: The maximum amount of tier 3 quarries a user can have (nextquarry.admin bypasses this feature)
 user-max-tier-3-quarries: 8
+#User max quarries: The maximum amount of quarries a user can place. This should probably be equal to the sum of the limit of tiers (tier1 + tier2 + tier3)
+user-max-quarries: 24
 
 # -- PLUGIN OPTIONS --
 #Auto Update: Makes sure the plugin updates automatically when there's an update available.

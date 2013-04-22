@@ -30,6 +30,7 @@ public class Configuration {
     public int maxquarriestier1 = 8;
     public int maxquarriestier2 = 8;
     public int maxquarriestier3 = 8;
+    public int user_max_quarries = 24;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -72,6 +73,7 @@ public class Configuration {
         MainClass.config.maxquarriestier3 = fc.getInt("user-max-tier-3-quarries");
         MainClass.config.world_whitelist_enabled = fc.getBoolean("world-whitelist-enabled");
         MainClass.config.draw_all_beams = fc.getBoolean("draw-all-beams");
+        MainClass.config.user_max_quarries = fc.getInt("user-max-quarries");
 
     }
 
