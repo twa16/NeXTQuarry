@@ -544,8 +544,48 @@ public class Quarry {
             ArmBlocks.clear();
         } catch (Exception e) {
         }
-        //draw actual arm
+
+        //quick removal of blocks left behind
         World world = block.getWorld();
+        if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
+            for (int x = 0; x < holesize; x++) {
+                for (int z = 0; z < holesize; z++) {
+                    for (int y = 0; y <= (yvar + 5); y++) {
+                        Location loc = new Location(world, block.getX() - x - 1, block.getY() + (5 - y), block.getZ() + z + 2);
+                        WorldFunctions.queueBlock(world.getBlockAt(loc), Material.AIR.getId(), (byte) 0);
+                    }
+                }
+            }
+        } else if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
+            for (int x = 0; x < holesize; x++) {
+                for (int z = 0; z < holesize; z++) {
+                    for (int y = 0; y <= (yvar + 5); y++) {
+                        Location loc = new Location(world, block.getX() - 2 - x, block.getY() + (5 - y), block.getZ() - z - 1);
+                        WorldFunctions.queueBlock(world.getBlockAt(loc), Material.AIR.getId(), (byte) 0);
+                    }
+                }
+            }
+        } else if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
+            for (int x = 0; x < holesize; x++) {
+                for (int z = 0; z < holesize; z++) {
+                    for (int y = 0; y <= (yvar + 5); y++) {
+                        Location loc = new Location(world, x + block.getX() + 1, block.getY() + (5 - y), block.getZ() - z - 2);
+                        WorldFunctions.queueBlock(world.getBlockAt(loc), Material.AIR.getId(), (byte) 0);
+                    }
+                }
+            }
+        } else if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
+            for (int x = 0; x < holesize; x++) {
+                for (int z = 0; z < holesize; z++) {
+                    for (int y = 0; y <= (yvar + 5); y++) {
+                        Location loc = new Location(world, x + block.getX() + 2, block.getY() + (5 - y), block.getZ() + z + 1);
+                        WorldFunctions.queueBlock(world.getBlockAt(loc), Material.AIR.getId(), (byte) 0);
+                    }
+                }
+            }
+        }
+
+        //draw actual arm
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             for (int x = 0; x < holesize; x++) {
                 for (int z = 0; z < holesize; z++) {
@@ -913,7 +953,7 @@ public class Quarry {
                     for (int y = 0; y < 6; y++) {
                         Location loc = new Location(world, x + block.getX(), block.getY() + y, block.getZ() - z - 1);
                         if (isInQuarriesBlock(world.getBlockAt(loc))) {
-                           continue;
+                            continue;
                         }
                         if (!world.getBlockAt(loc).getType().equals(Material.AIR) && !world.getBlockAt(loc).getType().equals(Material.COBBLE_WALL) && !world.getBlockAt(loc).getType().equals(Material.CAULDRON) && !world.getBlockAt(loc).getType().equals(Material.HOPPER) && !world.getBlockAt(loc).getType().equals(Material.IRON_BLOCK)) {
 
