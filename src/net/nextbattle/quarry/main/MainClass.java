@@ -32,9 +32,10 @@ public final class MainClass extends JavaPlugin {
     public static Configuration config;
     public static CustomItems citems;
     public static int timer;
+    public static int savetimer;
     public static CommandHandler ch;
     public static PluginSupport ps;
-    
+
     public static void main(String[] args) {
         System.out.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
         System.out.println("Please place NeXTQuarry.jar (this file) in the plugins directory of your CraftBukkit installation.");
@@ -68,11 +69,11 @@ public final class MainClass extends JavaPlugin {
         }
         plugin.reloadConfig();
         Configuration.loadConfig();
-        
-         //Initialize Custom Items
+
+        //Initialize Custom Items
         citems = new CustomItems();
         citems.addRecipes();
-        
+
         //Plugin Support
         ps = new PluginSupport();
 
@@ -115,11 +116,21 @@ public final class MainClass extends JavaPlugin {
                 }
             }
         }, 0, 5L);
+
+        savetimer = getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
+            @Override
+            public void run() {
+                getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
+                Quarry.saveAll();
+                getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
+            }
+        }, 0, 1200L);
     }
 
     @Override
     public void onDisable() {
         getServer().getScheduler().cancelTask(timer);
+        getServer().getScheduler().cancelTask(savetimer);
         getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
         Quarry.saveAll();
         getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
