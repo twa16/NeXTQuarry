@@ -28,6 +28,7 @@ public class CustomItems {
     public ItemStack fuel_finder_upgrade;
     public ItemStack chest_miner;
     public ItemStack fuel_efficiency_upgrade;
+    public ItemStack smelter_upgrade;
 
     public CustomItems() {
         //Work Vars
@@ -45,6 +46,17 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier1 = is;
+        
+        //Fuel Efficiency Upgrade
+        is = new ItemStack(MainClass.config.smelter_upgrade, 1);
+        meta = is.getItemMeta();
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Smelter Upgrade");
+        lorelist = new ArrayList<String>();
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Gives the quarry the ability to smelt ores");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        meta.setLore(lorelist);
+        is.setItemMeta(meta);
+        smelter_upgrade = is;
         
         //Tier 1 Quarry
         is = new ItemStack(Material.IRON_BLOCK, 1);
@@ -208,6 +220,15 @@ public class CustomItems {
         recipe.setIngredient('A', Material.REDSTONE);
         recipe.setIngredient('B', Material.GOLD_HOE);
         recipe.setIngredient('C', Material.CHEST);
+        Bukkit.getServer().addRecipe(recipe);
+        
+        //Smelter upgrade
+        recipe = new ShapedRecipe(smelter_upgrade);
+        recipe.shape("ABA", "CDA", "ABA");
+        recipe.setIngredient('A', Material.IRON_INGOT);
+        recipe.setIngredient('B', Material.HOPPER);
+        recipe.setIngredient('C', Material.REDSTONE);
+        recipe.setIngredient('C', Material.FURNACE);
         Bukkit.getServer().addRecipe(recipe);
 
     }

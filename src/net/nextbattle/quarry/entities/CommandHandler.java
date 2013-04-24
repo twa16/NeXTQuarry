@@ -39,9 +39,13 @@ public class CommandHandler implements CommandExecutor {
                     p.getInventory().addItem(MainClass.citems.fuel_finder_upgrade);
                 } else if (args[1].equals("chestminer")) {
                     p.getInventory().addItem(MainClass.citems.chest_miner);
-                } else {
+                }else if (args[1].equals("smelter")) {
+                    p.getInventory().addItem(MainClass.citems.smelter_upgrade);
+                } else if (args[1].equals("fuelupgrade")) {
+                    p.getInventory().addItem(MainClass.citems.fuel_efficiency_upgrade);
+                }  else {
                     p.sendMessage(ChatColor.GOLD + "This item does not exist!");
-                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder & chestminer.");
+                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter & chestminer.");
                 }
                 return true;
             }

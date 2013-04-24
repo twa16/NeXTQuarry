@@ -11,6 +11,7 @@ import net.nextbattle.quarry.functions.WorldFunctions;
 import net.nextbattle.quarry.main.MainClass;
 import net.nextbattle.quarry.types.BlockLocation;
 import org.bukkit.Bukkit;
+import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -18,11 +19,14 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.BlockState;
 import org.bukkit.block.Chest;
+import org.bukkit.material.Furnace;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.material.Directional;
+import org.bukkit.material.DirectionalContainer;
 
 public class Quarry {
 
@@ -48,6 +52,12 @@ public class Quarry {
     private FileConfiguration fc;
     private String random_id;
     private boolean cantick = true;
+    public BlockLocation upgrade_slot_1_bl = null;
+    public BlockLocation upgrade_slot_2_bl = null;
+    public BlockLocation upgrade_slot_3_bl = null;
+    public int upgrade_slot_1 = 0;
+    public int upgrade_slot_2 = 0;
+    public int upgrade_slot_3 = 0;
 
     public static void LoadQuarry(File loadfile) {
         FileConfiguration fc_temp = YamlConfiguration.loadConfiguration(loadfile);
@@ -174,6 +184,32 @@ public class Quarry {
         fc.save(file);
     }
 
+    public int isQuarryUpgrade(BlockLocation bl) {
+        if (bl.equals(upgrade_slot_1_bl)) {
+            return 1;
+        }
+        if (bl.equals(upgrade_slot_2_bl)) {
+            return 2;
+        }
+        if (bl.equals(upgrade_slot_3_bl)) {
+            return 3;
+        }
+        return 0;
+    }
+
+    public int getUpgradeType(int slot) {
+        if (slot == 1) {
+            return upgrade_slot_1;
+        }
+        if (slot == 2) {
+            return upgrade_slot_2;
+        }
+        if (slot == 3) {
+            return upgrade_slot_3;
+        }
+        return 0;
+    }
+
     public Quarry(BlockFace dir, int tier, Block b, Player p) {
         this.dir = dir;
         this.tier = tier;
@@ -265,21 +301,7 @@ public class Quarry {
     }
 
     public int getInterval() {
-        int upgrades = 0;
-        for (ItemStack is : upgr_inv.getContents()) {
-            try {
-                if (is != null) {
-                    try {
-                        if (is.getItemMeta().getDisplayName().equals(MainClass.citems.speed_upgrade.getItemMeta().getDisplayName())) {
-                            upgrades += is.getAmount();
-                        }
-                    } catch (Exception e) {
-                    }
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
+        int upgrades = getUpgradeCount(MainClass.citems.speed_upgrade);
         if (upgrades >= 3) {
             return 1;
         } else if (upgrades == 2) {
@@ -340,7 +362,27 @@ public class Quarry {
         return false;
     }
 
+    public int getUpgradeCount(ItemStack item) {
+        int upgrades = 0;
+        for (ItemStack is : upgr_inv.getContents()) {
+            try {
+                if (is != null) {
+                    try {
+                        if (is.getItemMeta().getDisplayName().equals(item.getItemMeta().getDisplayName())) {
+                            upgrades += is.getAmount();
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return upgrades;
+    }
+
     public void doTick() {
+        //Continue when owner is offline, or is located in unloaded chunk
         if (!block.getBlock().getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
             return;
         }
@@ -351,6 +393,8 @@ public class Quarry {
         } else if (!MainClass.config.continue_when_offline) {
             return;
         }
+
+        //Make sure quarry block is still there
         if (tier == 0) {
             WorldFunctions.queueBlock(block.getBlock(), Material.IRON_BLOCK.getId(), (byte) 0);
         }
@@ -360,6 +404,82 @@ public class Quarry {
         if (tier == 2) {
             WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
         }
+
+        //Check for upgrades and fill slots
+        if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
+            if (upgrade_slot_1 == 0) {
+                upgrade_slot_1 = 1;
+            } else if (upgrade_slot_2 == 0) {
+                upgrade_slot_2 = 1;
+            } else if (upgrade_slot_3 == 0) {
+                upgrade_slot_3 = 1;
+            }
+        }
+
+        //Draw actual upgrade slots
+        BlockLocation bl = null;
+        if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
+            bl = new BlockLocation(block.getX() - 1, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() - 1, block.getWorld());
+        }
+        if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() + 1, block.getWorld());
+        }
+        if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
+            bl = new BlockLocation(block.getX() + 1, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (upgrade_slot_1 == 1) {
+            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+            BlockState bs = bl.getBlock().getState();
+            if (bs instanceof Furnace) {
+                Furnace furnace = (Furnace) bs;
+                furnace.setFacingDirection(dir.getOppositeFace());
+            }
+        }
+        if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
+            bl = new BlockLocation(block.getX() - 2, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() - 2, block.getWorld());
+        }
+        if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() + 2, block.getWorld());
+        }
+        if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
+            bl = new BlockLocation(block.getX() + 2, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (upgrade_slot_2 == 1) {
+            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+            BlockState bs = bl.getBlock().getState();
+            if (bs instanceof Furnace) {
+                Furnace furnace = (Furnace) bs;
+                furnace.setFacingDirection(dir.getOppositeFace());
+            }
+        }
+        if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
+            bl = new BlockLocation(block.getX() - 3, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() - 3, block.getWorld());
+        }
+        if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
+            bl = new BlockLocation(block.getX(), block.getY(), block.getZ() + 3, block.getWorld());
+        }
+        if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
+            bl = new BlockLocation(block.getX() + 3, block.getY(), block.getZ(), block.getWorld());
+        }
+        if (upgrade_slot_3 == 1) {
+            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+            BlockState bs = bl.getBlock().getState();
+            if (bs instanceof Furnace) {
+                Furnace furnace = (Furnace) bs;
+                furnace.setFacingDirection(dir.getOppositeFace());
+            }
+        }
+
+        //Tick Checks
         if (!cantick) {
             return;
         }
@@ -378,31 +498,17 @@ public class Quarry {
                 } else {
                     fuel_inv.getItem(fuel_inv.first(Material.COAL)).setAmount(fuel_inv.getItem(fuel_inv.first(Material.COAL)).getAmount() - 1);
                 }
-                int upgrades = 0;
-        for (ItemStack is : upgr_inv.getContents()) {
-            try {
-                if (is != null) {
-                    try {
-                        if (is.getItemMeta().getDisplayName().equals(MainClass.citems.fuel_efficiency_upgrade.getItemMeta().getDisplayName())) {
-                            upgrades += is.getAmount();
-                        }
-                    } catch (Exception e) {
-                    }
+                int upgrades = getUpgradeCount(MainClass.citems.fuel_efficiency_upgrade);
+                if (upgrades >= 3) {
+                    fuelcounter += 64;
+                } else if (upgrades == 2) {
+                    fuelcounter += 48;
+                } else if (upgrades == 1) {
+                    fuelcounter += 32;
+                } else if (upgrades <= 0) {
+                    fuelcounter += 16;
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        if (upgrades >= 3) {
-            fuelcounter += 64;
-        } else if (upgrades == 2) {
-            fuelcounter += 48;
-        } else if (upgrades == 1) {
-            fuelcounter += 32;
-        } else if (upgrades <= 0) {
-            fuelcounter += 16;
-        }
-                
+
             } else {
                 fuelcounter = 0;
                 return;
@@ -413,13 +519,66 @@ public class Quarry {
         if (!buildFrame(true)) {
             if (!mineStep()) {
                 drawArm();
-            }
-            else {
-                fuelcounter -= 1;
+            } else {
+                if (trySmelt()) {
+                    fuelcounter -= 2;
+                } else {
+                    fuelcounter -= 1;
+                }
             }
         }
-        
+
         WorldFunctions.processQueue();
+    }
+
+    public boolean trySmelt() {
+        if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
+            Location loc2 = block.getLocation();
+            loc2.add(0, 1, 0);
+            BlockState blockState = block.getWorld().getBlockAt(loc2).getState();
+            if (blockState instanceof Chest) {
+                Chest chest = (Chest) blockState;
+                if (chest.getInventory().contains(Material.IRON_ORE)) {
+                    if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(Material.IRON_INGOT))) {
+                        if (chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).getAmount() == 1) {
+                            chest.getInventory().setItem(chest.getInventory().first(Material.IRON_ORE), null);
+                        } else {
+                            chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).getAmount() - 1);
+                        }
+                        if (upgrade_slot_1 == 1) {
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        if (upgrade_slot_2 == 1) {
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        if (upgrade_slot_3 == 1) {
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        return true;
+                    }
+                }
+                if (chest.getInventory().contains(Material.GOLD_ORE)) {
+                    if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(Material.GOLD_INGOT))) {
+                        if (chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).getAmount() == 1) {
+                            chest.getInventory().setItem(chest.getInventory().first(Material.GOLD_ORE), null);
+                        } else {
+                            chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).getAmount() - 1);
+                        }
+                        if (upgrade_slot_1 == 1) {
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        if (upgrade_slot_2 == 1) {
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        if (upgrade_slot_3 == 1) {
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                        }
+                        return true;
+                    }
+                }
+            }            
+        }
+        return false;
     }
 
     public Block getBlockAtSpot(int xw, int yw, int zw) {
@@ -461,7 +620,7 @@ public class Quarry {
         if (blockState instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
             Chest chest = (Chest) blockState;
             for (ItemStack is : getBlockAtSpot(xwork, ywork, zwork).getDrops()) {
-                if (is.getType().equals(Material.CHEST) && upgr_inv.contains(MainClass.citems.chest_miner)) {
+                if (is.getType().equals(Material.CHEST) && getUpgradeCount(MainClass.citems.chest_miner) > 0) {
                     BlockState minecheststate = getBlockAtSpot(xwork, ywork, zwork).getState();
                     if (minecheststate instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
                         Chest minechest = (Chest) minecheststate;
@@ -472,7 +631,7 @@ public class Quarry {
                         }
                     }
                 }
-                if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && upgr_inv.contains(MainClass.citems.fuel_finder_upgrade)) {
+                if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && getUpgradeCount(MainClass.citems.fuel_finder_upgrade) > 0) {
                     fuel_inv.addItem(is);
                 } else {
                     if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
