@@ -31,7 +31,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onBlockPlace(BlockPlaceEvent evt) {
         try {
-            if (evt.getItemInHand().equals(MainClass.citems.fuel_upgrade)) {
+            if (evt.getItemInHand().equals(MainClass.citems.fuel_finder_upgrade)) {
                 evt.setCancelled(true);
                 return;
             }

@@ -53,9 +53,10 @@ send-usage-data: true
 speed_upgrade: 347
 wrench_tool: 369
 fuel_tool: 325
-fuel_upgrade: 96
+fuel_finder_upgrade: 96
 chest_miner: 286
-
+fuel_efficiency_upgrade: 120
+ 
 # -- WORLD OPTIONS --
 #World whitelist enabled: If set to true, quarries will only be placable in worlds listed in the worlds whitelist.
 world-whitelist-enabled: false

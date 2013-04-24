@@ -25,8 +25,9 @@ public class CustomItems {
     public ItemStack speed_upgrade;
     public ItemStack wrench_tool;
     public ItemStack fuel_tool;
-    public ItemStack fuel_upgrade;
+    public ItemStack fuel_finder_upgrade;
     public ItemStack chest_miner;
+    public ItemStack fuel_efficiency_upgrade;
 
     public CustomItems() {
         //Work Vars
@@ -34,6 +35,17 @@ public class CustomItems {
         ItemMeta meta;
         ArrayList<String> lorelist;
 
+        //Fuel Efficiency Upgrade
+        is = new ItemStack(MainClass.config.fuel_efficiency_upgrade, 1);
+        meta = is.getItemMeta();
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Fuel Efficiency Upgrade");
+        lorelist = new ArrayList<String>();
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Makes the quarry last longer per unit of fuel");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 3 per quarry");
+        meta.setLore(lorelist);
+        is.setItemMeta(meta);
+        quarry_tier1 = is;
+        
         //Tier 1 Quarry
         is = new ItemStack(Material.IRON_BLOCK, 1);
         meta = is.getItemMeta();
@@ -76,7 +88,7 @@ public class CustomItems {
         speed_upgrade = is;
 
         //Fuel Finder Upgrade
-        is = new ItemStack(MainClass.config.fuel_upgrade, 1);
+        is = new ItemStack(MainClass.config.fuel_finder_upgrade, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Quarry Fuel Finder");
         lorelist = new ArrayList<String>();
@@ -84,7 +96,7 @@ public class CustomItems {
         lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
-        fuel_upgrade = is;
+        fuel_finder_upgrade = is;
 
         //Wrench Tool
         is = new ItemStack(MainClass.config.wrench_tool, 1);
@@ -159,7 +171,7 @@ public class CustomItems {
         Bukkit.getServer().addRecipe(recipe);
 
         //Fuel Finder Upgrade
-        recipe = new ShapedRecipe(fuel_upgrade);
+        recipe = new ShapedRecipe(fuel_finder_upgrade);
         recipe.shape("ABA", "BCB", "ABA");
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.STICK);

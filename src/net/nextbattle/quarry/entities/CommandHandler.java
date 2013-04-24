@@ -36,7 +36,7 @@ public class CommandHandler implements CommandExecutor {
                 } else if (args[1].equals("fuelinjector")) {
                     p.getInventory().addItem(MainClass.citems.fuel_tool);
                 } else if (args[1].equals("fuelfinder")) {
-                    p.getInventory().addItem(MainClass.citems.fuel_upgrade);
+                    p.getInventory().addItem(MainClass.citems.fuel_finder_upgrade);
                 } else if (args[1].equals("chestminer")) {
                     p.getInventory().addItem(MainClass.citems.chest_miner);
                 } else {

@@ -378,7 +378,31 @@ public class Quarry {
                 } else {
                     fuel_inv.getItem(fuel_inv.first(Material.COAL)).setAmount(fuel_inv.getItem(fuel_inv.first(Material.COAL)).getAmount() - 1);
                 }
-                fuelcounter += 32;
+                int upgrades = 0;
+        for (ItemStack is : upgr_inv.getContents()) {
+            try {
+                if (is != null) {
+                    try {
+                        if (is.getItemMeta().getDisplayName().equals(MainClass.citems.fuel_efficiency_upgrade.getItemMeta().getDisplayName())) {
+                            upgrades += is.getAmount();
+                        }
+                    } catch (Exception e) {
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        if (upgrades >= 3) {
+            fuelcounter += 64;
+        } else if (upgrades == 2) {
+            fuelcounter += 48;
+        } else if (upgrades == 1) {
+            fuelcounter += 32;
+        } else if (upgrades <= 0) {
+            fuelcounter += 16;
+        }
+                
             } else {
                 fuelcounter = 0;
                 return;
@@ -448,7 +472,7 @@ public class Quarry {
                         }
                     }
                 }
-                if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && upgr_inv.contains(MainClass.citems.fuel_upgrade)) {
+                if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && upgr_inv.contains(MainClass.citems.fuel_finder_upgrade)) {
                     fuel_inv.addItem(is);
                 } else {
                     if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
