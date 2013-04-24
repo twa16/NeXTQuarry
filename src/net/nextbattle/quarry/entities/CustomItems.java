@@ -128,12 +128,21 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         chest_miner = is;
+        
     }
 
     public void addRecipes() {
         //Work Variable
         ShapedRecipe recipe;
 
+        //Fuel Efficiency Upgrade
+        recipe = new ShapedRecipe(fuel_efficiency_upgrade);
+        recipe.shape("ABA", "BCB", "ABA");
+        recipe.setIngredient('A', Material.IRON_INGOT);
+        recipe.setIngredient('B', Material.REDSTONE);
+        recipe.setIngredient('C', Material.DIAMOND);
+        Bukkit.getServer().addRecipe(recipe);
+        
         //Tier 1 Quarry
         recipe = new ShapedRecipe(quarry_tier1);
         recipe.shape("ABA", "ACA", "ADA");
