@@ -384,14 +384,17 @@ public class Quarry {
                 return;
             }
         }
-        fuelcounter -= 1;
 
         //Actions
         if (!buildFrame(true)) {
             if (!mineStep()) {
                 drawArm();
             }
+            else {
+                fuelcounter -= 1;
+            }
         }
+        
         WorldFunctions.processQueue();
     }
 
@@ -440,7 +443,7 @@ public class Quarry {
                         Chest minechest = (Chest) minecheststate;
                         for (ItemStack isc : minechest.getBlockInventory().getContents()) {
                             if (!PlayerFunctions.addItems(chest.getInventory(), isc)) {
-                                return true;
+                                return false;
                             }
                         }
                     }
@@ -449,7 +452,7 @@ public class Quarry {
                     fuel_inv.addItem(is);
                 } else {
                     if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
-                        return true;
+                        return false;
                     }
                 }
             }
@@ -459,7 +462,7 @@ public class Quarry {
                 WorldFunctions.queueBlock(getBlockAtSpot(xwork, ywork, zwork), Material.AIR.getId(), (byte) 0);
                 MainClass.ps.logRemoval(playername, getBlockAtSpot(xwork, ywork, zwork).getLocation(), getBlockAtSpot(xwork, ywork, zwork).getTypeId(), getBlockAtSpot(xwork, ywork, zwork).getData());
             } else {
-                return true;
+                return false;
             }
 
         }
@@ -471,31 +474,31 @@ public class Quarry {
                     if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork + 1, zwork).getType())) {
                         ywork++;
                     } else {
-                        return true;
+                        return false;
                     }
                 }
                 if (!MainClass.config.cantbreak.contains(getBlockAtSpot(0, ywork, zwork).getType())) {
                     xwork = 0;
                 } else {
-                    return true;
+                    return false;
                 }
             } else {
                 if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork + 1, ywork, zwork).getType())) {
                     xwork++;
                 } else {
-                    return true;
+                    return false;
                 }
             }
             if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, 0).getType())) {
                 zwork = 0;
             } else {
-                return true;
+                return false;
             }
         } else {
             if (!MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork + 1).getType())) {
                 zwork++;
             } else {
-                return true;
+                return false;
             }
         }
         drawArm();

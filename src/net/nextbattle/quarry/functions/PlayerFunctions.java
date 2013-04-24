@@ -1,16 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.functions;
 
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-/**
- *
- * @author Bodhi
- */
 public class PlayerFunctions {
 
     public static boolean addItems(Inventory inv, ItemStack is) {
