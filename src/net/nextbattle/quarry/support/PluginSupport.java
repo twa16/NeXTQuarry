@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.support;
 
 import java.util.logging.Level;
@@ -10,10 +6,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 
-/**
- *
- * @author Bodhi
- */
 public class PluginSupport {
 
     public WorldGuard wg;
@@ -29,19 +21,39 @@ public class PluginSupport {
 
     public void logPlacement(String username, Location loc, int type, byte data) {
         if (cp != null) {
-            cp.logPlacement(username, loc, type, data);
+            try {
+                cp.logPlacement(username, loc, type, data);
+            } catch (Exception e) {
+                cp = null;
+                Bukkit.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] An error occurred with CoreProtect. CoreProtect has been detatched from NeXTQuarry.");
+            }
         }
         if (lb != null) {
-            lb.logPlacement(username, loc, type, data);
+            try {
+                lb.logPlacement(username, loc, type, data);
+            } catch (Exception e) {
+                lb = null;
+                Bukkit.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] An error occurred with LogBlock. LogBlock has been detatched from NeXTQuarry.");
+            }
         }
     }
 
     public void logRemoval(String username, Location loc, int type, byte data) {
         if (cp != null) {
-            cp.logRemoval(username, loc, type, data);
+            try {
+                cp.logRemoval(username, loc, type, data);
+            } catch (Exception e) {
+                cp = null;
+                Bukkit.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] An error occurred with CoreProtect. CoreProtect has been detatched from NeXTQuarry.");
+            }
         }
         if (lb != null) {
-            lb.logRemoval(username, loc, type, data);
+            try {
+                lb.logRemoval(username, loc, type, data);
+            } catch (Exception e) {
+                lb = null;
+                Bukkit.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] An error occurred with LogBlock. LogBlock has been detatched from NeXTQuarry.");
+            }
         }
     }
 
@@ -90,11 +102,11 @@ public class PluginSupport {
         }
         // PLANNED SUPPORT FOR PRISM
         /*if (Bukkit.getPluginManager().getPlugin("Prism") != null) {
-            pm = new Prism_();
-            MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Prism found & Attatched.");
+         pm = new Prism_();
+         MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Prism found & Attatched.");
 
-        } else {
-            pm = null;
-        }*/
+         } else {
+         pm = null;
+         }*/
     }
 }
