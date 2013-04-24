@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
+import net.nextbattle.quarry.functions.PlayerFunctions;
 import net.nextbattle.quarry.functions.StringFunctions;
 import net.nextbattle.quarry.functions.WorldFunctions;
 import net.nextbattle.quarry.main.MainClass;
@@ -438,9 +439,7 @@ public class Quarry {
                     if (minecheststate instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
                         Chest minechest = (Chest) minecheststate;
                         for (ItemStack isc : minechest.getBlockInventory().getContents()) {
-                            if (chest.getInventory().firstEmpty() != -1) {
-                                chest.getInventory().addItem(isc);
-                            } else {
+                            if (!PlayerFunctions.addItems(chest.getInventory(), isc)) {
                                 return true;
                             }
                         }
@@ -449,9 +448,7 @@ public class Quarry {
                 if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && upgr_inv.contains(MainClass.citems.fuel_upgrade)) {
                     fuel_inv.addItem(is);
                 } else {
-                    if (chest.getInventory().firstEmpty() != -1) {
-                        chest.getInventory().addItem(is);
-                    } else {
+                    if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
                         return true;
                     }
                 }
