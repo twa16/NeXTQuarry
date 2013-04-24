@@ -1200,6 +1200,7 @@ public class Quarry {
             for (BlockLocation b : ArmBlocks) {
                 WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
             }
+            WorldFunctions.processQueue();
         } catch (Exception e) {
         }
         file.delete();
