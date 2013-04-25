@@ -643,8 +643,12 @@ public class Quarry {
             if (getUpgradeCount(MainClass.citems.liquid_miner) > 0 && blockid >= 8 && blockid <= 11) {
                 if (chest.getInventory().contains(Material.BUCKET)) {
                     Material filled = null;
-                    if (blockid == 8 || blockid == 9) { filled = Material.WATER_BUCKET; }
-                    if (blockid == 10 || blockid == 11) { filled = Material.LAVA_BUCKET; }
+                    if (blockid == 8 || blockid == 9) {
+                        filled = Material.WATER_BUCKET;
+                    }
+                    if (blockid == 10 || blockid == 11) {
+                        filled = Material.LAVA_BUCKET;
+                    }
                     if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(filled))) {
                         if (chest.getInventory().getItem(chest.getInventory().first(Material.BUCKET)).getAmount() == 1) {
                             chest.getInventory().setItem(chest.getInventory().first(Material.BUCKET), null);
