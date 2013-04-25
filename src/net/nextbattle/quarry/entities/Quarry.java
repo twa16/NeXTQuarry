@@ -546,13 +546,13 @@ public class Quarry {
                             chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).getAmount() - 1);
                         }
                         if (upgrade_slot_1 == 1) {
-                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         if (upgrade_slot_2 == 1) {
-                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         if (upgrade_slot_3 == 1) {
-                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         return true;
                     }
@@ -565,18 +565,18 @@ public class Quarry {
                             chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).getAmount() - 1);
                         }
                         if (upgrade_slot_1 == 1) {
-                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         if (upgrade_slot_2 == 1) {
-                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         if (upgrade_slot_3 == 1) {
-                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5,0.5,0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
                         }
                         return true;
                     }
                 }
-            }            
+            }
         }
         return false;
     }
@@ -636,6 +636,21 @@ public class Quarry {
                 } else {
                     if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
                         return false;
+                    }
+                }
+            }
+            int blockid = getBlockAtSpot(xwork, ywork, zwork).getType().getId();
+            if (getUpgradeCount(MainClass.citems.liquid_miner) > 0 && blockid >= 8 && blockid <= 11) {
+                if (chest.getInventory().contains(Material.BUCKET)) {
+                    Material filled = null;
+                    if (blockid == 8 || blockid == 9) { filled = Material.WATER_BUCKET; }
+                    if (blockid == 10 || blockid == 11) { filled = Material.LAVA_BUCKET; }
+                    if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(filled))) {
+                        if (chest.getInventory().getItem(chest.getInventory().first(Material.BUCKET)).getAmount() == 1) {
+                            chest.getInventory().setItem(chest.getInventory().first(Material.BUCKET), null);
+                        } else {
+                            chest.getInventory().getItem(chest.getInventory().first(Material.BUCKET)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.BUCKET)).getAmount() - 1);
+                        }
                     }
                 }
             }

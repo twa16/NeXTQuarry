@@ -8,11 +8,8 @@ private-quarries: true
 #Ignore Blocks: All blocktypes in this list can't be mined by a quarry. IMPORTANT: Removing the liquids from this list, may lag or crash your server!
 ignored-blocks:
 - '7'
-- '49'
-- '9'
-- '11'
-- '8'
-- '10'
+- '49' 
+
 #Global Max Quarries: The maximum amount of quarries in the whole server (nextquarry.admin bypasses this feature)
 global-max-quarries: 256
 #User max tier 1 quarries: The maximum amount of tier 1 quarries a user can have (nextquarry.admin bypasses this feature)
@@ -57,6 +54,7 @@ fuel_finder_upgrade: 96
 chest_miner: 286
 fuel_efficiency_upgrade: 120
 smelter_upgrade: 61
+liquid_miner: 154
  
 # -- WORLD OPTIONS --
 #World whitelist enabled: If set to true, quarries will only be placable in worlds listed in the worlds whitelist.

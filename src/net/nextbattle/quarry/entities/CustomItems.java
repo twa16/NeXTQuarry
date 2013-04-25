@@ -29,6 +29,7 @@ public class CustomItems {
     public ItemStack chest_miner;
     public ItemStack fuel_efficiency_upgrade;
     public ItemStack smelter_upgrade;
+    public ItemStack liquid_miner;
 
     public CustomItems() {
         //Work Vars
@@ -45,9 +46,9 @@ public class CustomItems {
         lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 3 per quarry");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
-        quarry_tier1 = is;
+        fuel_efficiency_upgrade = is;
         
-        //Fuel Efficiency Upgrade
+        //Smelter Upgrade
         is = new ItemStack(MainClass.config.smelter_upgrade, 1);
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Smelter Upgrade");
@@ -57,6 +58,17 @@ public class CustomItems {
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         smelter_upgrade = is;
+        
+        //Liquid Miner
+        is = new ItemStack(MainClass.config.liquid_miner, 1);
+        meta = is.getItemMeta();
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Liquid Miner");
+        lorelist = new ArrayList<String>();
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Allows buckets to be filled with found liquids");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        meta.setLore(lorelist);
+        is.setItemMeta(meta);
+        liquid_miner = is;
         
         //Tier 1 Quarry
         is = new ItemStack(Material.IRON_BLOCK, 1);
@@ -153,6 +165,13 @@ public class CustomItems {
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.DIAMOND);
+        Bukkit.getServer().addRecipe(recipe);
+        
+        //Liquid Miner
+        recipe = new ShapedRecipe(liquid_miner);
+        recipe.shape("A A", "A A", " B ");
+        recipe.setIngredient('A', Material.IRON_INGOT);
+        recipe.setIngredient('B', Material.BUCKET);
         Bukkit.getServer().addRecipe(recipe);
         
         //Tier 1 Quarry

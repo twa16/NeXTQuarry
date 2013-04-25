@@ -28,6 +28,7 @@ public class Configuration {
     public Material chest_miner = Material.GOLD_AXE;
     public Material fuel_efficiency_upgrade = Material.ENDER_PORTAL_FRAME;
     public Material smelter_upgrade = Material.FURNACE;
+    public Material liquid_miner = Material.HOPPER;
     public int globalmaxquarries = 256;
     public int maxquarriestier1 = 8;
     public int maxquarriestier2 = 8;
@@ -64,6 +65,7 @@ public class Configuration {
         MainClass.config.fuel_efficiency_upgrade = Material.getMaterial(fc.getInt("fuel_efficiency_upgrade"));
         MainClass.config.chest_miner = Material.getMaterial(fc.getInt("chest_miner"));
         MainClass.config.smelter_upgrade = Material.getMaterial(fc.getInt("smelter_upgrade"));
+        MainClass.config.liquid_miner = Material.getMaterial(fc.getInt("liquid_miner"));
         MainClass.config.privatequarries = fc.getBoolean("private-quarries");
         MainClass.config.autoupdate = fc.getBoolean("auto-update");
         MainClass.config.updatenotify = fc.getBoolean("update-notify");
