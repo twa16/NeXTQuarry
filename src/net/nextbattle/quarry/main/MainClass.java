@@ -120,7 +120,7 @@ public final class MainClass extends JavaPlugin {
                 Quarry.saveAll();
                 getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
             }
-        }, 0, 1200L);
+        }, 1200L, 1200L);
     }
 
     @Override

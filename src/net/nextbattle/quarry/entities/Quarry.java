@@ -632,7 +632,7 @@ public class Quarry {
                     }
                 }
                 if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && getUpgradeCount(MainClass.citems.fuel_finder_upgrade) > 0) {
-                    fuel_inv.addItem(is);
+                    PlayerFunctions.addItems(fuel_inv, is);
                 } else {
                     if (!PlayerFunctions.addItems(chest.getInventory(), is)) {
                         return false;
