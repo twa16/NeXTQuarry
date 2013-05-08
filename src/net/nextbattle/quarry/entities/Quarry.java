@@ -407,12 +407,18 @@ public class Quarry {
 
         //Check for upgrades and fill slots
         if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
-            if (upgrade_slot_1 == 0) {
+            if (upgrade_slot_1 == 0 || upgrade_slot_1 == 1) {
                 upgrade_slot_1 = 1;
-            } else if (upgrade_slot_2 == 0) {
+                if (upgrade_slot_2 == 1) { upgrade_slot_2 = 0; }
+                if (upgrade_slot_3 == 1) { upgrade_slot_3 = 0; }
+            } else if (upgrade_slot_2 == 0 || upgrade_slot_2 == 1) {
                 upgrade_slot_2 = 1;
-            } else if (upgrade_slot_3 == 0) {
+                if (upgrade_slot_1 == 1) { upgrade_slot_3 = 0; }
+                if (upgrade_slot_3 == 1) { upgrade_slot_3 = 0; }
+            } else if (upgrade_slot_3 == 0 || upgrade_slot_3 == 1) {
                 upgrade_slot_3 = 1;
+                if (upgrade_slot_2 == 1) { upgrade_slot_2 = 0; }
+                if (upgrade_slot_1 == 1) { upgrade_slot_1 = 0; }
             }
         }
 
@@ -430,6 +436,7 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 1, block.getY(), block.getZ(), block.getWorld());
         }
+        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
         if (upgrade_slot_1 == 1) {
             WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
             BlockState bs = bl.getBlock().getState();
@@ -450,6 +457,7 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 2, block.getY(), block.getZ(), block.getWorld());
         }
+        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
         if (upgrade_slot_2 == 1) {
             WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
             BlockState bs = bl.getBlock().getState();
@@ -470,6 +478,7 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 3, block.getY(), block.getZ(), block.getWorld());
         }
+        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
         if (upgrade_slot_3 == 1) {
             WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
             BlockState bs = bl.getBlock().getState();
