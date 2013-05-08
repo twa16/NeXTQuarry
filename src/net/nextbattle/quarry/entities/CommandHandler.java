@@ -12,11 +12,15 @@ public class CommandHandler implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] args) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
+            if (args.length == 1 && args[0].equals("give")) {
+                cs.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
+            }
             if (args.length == 2 && args[0].equals("give")) {
                 if (!(cs instanceof Player)) {
                     cs.sendMessage(ChatColor.GOLD + "You can't execute this command from the console.");
                     return false;
                 }
+                
                 Player p = (Player) cs;
 
                 if (!p.hasPermission("nextquarry.admin")) {
@@ -47,7 +51,7 @@ public class CommandHandler implements CommandExecutor {
                     p.getInventory().addItem(MainClass.citems.liquid_miner);
                 } else {
                     p.sendMessage(ChatColor.GOLD + "This item does not exist!");
-                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter & chestminer.");
+                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
                 }
                 return true;
             }

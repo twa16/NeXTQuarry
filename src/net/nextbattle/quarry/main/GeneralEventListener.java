@@ -127,6 +127,12 @@ public class GeneralEventListener implements Listener {
                     is = MainClass.citems.quarry_tier3;
                 }
                 evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is);
+                for (ItemStack is2 : q.upgr_inv.getContents()) {
+                    evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                }
+                for (ItemStack is2 : q.fuel_inv.getContents()) {
+                    evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                }
                 q.delete();
             }
             if (Quarry.isInQuarriesBlock(evt.getBlock())) {
