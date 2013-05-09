@@ -7,6 +7,7 @@ import org.bukkit.inventory.ItemStack;
 public class PlayerFunctions {
     
     public static boolean addItems(Inventory inv, ItemStack is) {
+        if (is == null) { return true; }
         HashMap<Integer, ItemStack> didnotfit;
         didnotfit = inv.addItem(is);
         if (didnotfit.isEmpty()) { return true; }

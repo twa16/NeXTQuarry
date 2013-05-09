@@ -638,6 +638,8 @@ public class Quarry {
                                 return false;
                             }
                         }
+                        minechest.getBlockInventory().clear();
+                        
                     }
                 }
                 if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && getUpgradeCount(MainClass.citems.fuel_finder_upgrade) > 0) {
