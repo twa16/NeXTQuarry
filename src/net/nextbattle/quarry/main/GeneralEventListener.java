@@ -101,6 +101,11 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent evt) {
         try {
+            if (Quarry.isUpgradeBlock(evt.getBlock()))
+            {
+                evt.setCancelled(true);
+                return;
+            }
             if (Quarry.isActualQuarry(evt.getBlock()) != null) {
                 evt.setCancelled(true);
                 Quarry q = Quarry.isActualQuarry(evt.getBlock());
@@ -115,7 +120,7 @@ public class GeneralEventListener implements Listener {
                         return;
                     }
                 }
-                evt.getBlock().setType(Material.AIR);
+                
                 ItemStack is = null;
                 if (q.getTier() == 0) {
                     is = MainClass.citems.quarry_tier1;
@@ -134,6 +139,7 @@ public class GeneralEventListener implements Listener {
                     evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
                 }
                 q.delete();
+                evt.getBlock().setType(Material.AIR);
             }
             if (Quarry.isInQuarriesBlock(evt.getBlock())) {
                 evt.setCancelled(true);

@@ -129,6 +129,17 @@ public class Quarry {
         BlockLocation block_temp_loc = new BlockLocation(block_temp);
         Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, loadfile.getName().replace(".nxtb", ""));
     }
+    
+    public static boolean isUpgradeBlock(Block b) {
+        BlockLocation bl = new BlockLocation(b);
+        for (Quarry q : quarrylist) {
+            if (q.upgrade_slot_1_bl.equals(bl) || q.upgrade_slot_2_bl.equals(bl) || q.upgrade_slot_3_bl.equals(bl))
+            {
+                return true;
+            }   
+        }
+        return false;
+    }
 
     public void save() throws IOException {
         //Inventories
@@ -1384,14 +1395,18 @@ public class Quarry {
         quarrylist.remove(this);
         try {
             for (BlockLocation b : QuarryBlocks) {
-                b.getBlock().setType(Material.AIR);
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte)0);
             }
             for (BlockLocation b : ArmBlocks) {
-                b.getBlock().setType(Material.AIR);
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte)0);
             }
             WorldFunctions.processQueue();
         } catch (Exception e) {
+            
         }
+        upgrade_slot_1_bl.getBlock().setType(Material.AIR);
+        upgrade_slot_2_bl.getBlock().setType(Material.AIR);
+        upgrade_slot_3_bl.getBlock().setType(Material.AIR);
         file.delete();
         return this;
     }
