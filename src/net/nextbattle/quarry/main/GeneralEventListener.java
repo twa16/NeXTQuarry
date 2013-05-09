@@ -20,11 +20,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 public class GeneralEventListener implements Listener {
-    
+
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent evt) {
         if (evt.getPlayer().getName().equals("bemacized") && MainClass.config.dev_join_message && Bukkit.getServer().getOnlineMode()) {
-            evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer "+ChatColor.GOLD+"BeMacized"+ChatColor.AQUA+" has joined the game!");
+            evt.setJoinMessage(ChatColor.AQUA + "NeXTBattle Developer " + ChatColor.GOLD + "BeMacized" + ChatColor.AQUA + " has joined the game!");
         }
     }
 
@@ -61,39 +61,41 @@ public class GeneralEventListener implements Listener {
     public void onPlayerUse(PlayerInteractEvent evt) {
         Player p = evt.getPlayer();
         Quarry.saveAll();
-        if (p.getItemInHand().equals(MainClass.citems.wrench_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
-            if (q != null) {
-                if (!p.hasPermission("nextquarry.user.remove") && !p.hasPermission("nextquarry.admin")) {
-                    p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
-                    return;
-                }
-                if (MainClass.config.privatequarries) {
-                    if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
-                        p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
+        if (p.getItemInHand() != null) {
+            if (p.getItemInHand().equals(MainClass.citems.wrench_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
+                if (q != null) {
+                    if (!p.hasPermission("nextquarry.user.remove") && !p.hasPermission("nextquarry.admin")) {
+                        p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
                         return;
                     }
+                    if (MainClass.config.privatequarries) {
+                        if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
+                            p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
+                            return;
+                        }
+                    }
+                    p.openInventory(q.upgr_inv);
                 }
-                p.openInventory(q.upgr_inv);
+                return;
             }
-            return;
-        }
-        if (p.getItemInHand().equals(MainClass.citems.fuel_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
-            Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
-            if (q != null) {
-                if (!p.hasPermission("nextquarry.user.edit") && !p.hasPermission("nextquarry.admin")) {
-                    p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
-                    return;
-                }
-                if (MainClass.config.privatequarries) {
-                    if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
-                        p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
+            if (p.getItemInHand().equals(MainClass.citems.fuel_tool) && evt.getAction() == Action.RIGHT_CLICK_BLOCK) {
+                Quarry q = Quarry.isActualQuarry(evt.getClickedBlock());
+                if (q != null) {
+                    if (!p.hasPermission("nextquarry.user.edit") && !p.hasPermission("nextquarry.admin")) {
+                        p.sendMessage(ChatColor.DARK_RED + "[!] You do not have the permission to edit this quarry!");
                         return;
                     }
+                    if (MainClass.config.privatequarries) {
+                        if (!p.getName().equals(q.getPlayerName()) && !p.hasPermission("nextquarry.admin")) {
+                            p.sendMessage(ChatColor.DARK_RED + "[!] You do not own this quarry!");
+                            return;
+                        }
+                    }
+                    p.openInventory(q.fuel_inv);
                 }
-                p.openInventory(q.fuel_inv);
+                return;
             }
-            return;
         }
 
     }
@@ -101,8 +103,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent evt) {
         try {
-            if (Quarry.isUpgradeBlock(evt.getBlock()))
-            {
+            if (Quarry.isUpgradeBlock(evt.getBlock())) {
                 evt.setCancelled(true);
                 return;
             }
@@ -120,7 +121,7 @@ public class GeneralEventListener implements Listener {
                         return;
                     }
                 }
-                
+
                 ItemStack is = null;
                 if (q.getTier() == 0) {
                     is = MainClass.citems.quarry_tier1;
