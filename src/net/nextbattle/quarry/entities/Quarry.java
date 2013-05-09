@@ -442,7 +442,7 @@ public class Quarry {
             BlockState bs = bl.getBlock().getState();
             if (bs instanceof Furnace) {
                 Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir.getOppositeFace());
+                furnace.setFacingDirection(dir);
             }
         }
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
@@ -463,7 +463,7 @@ public class Quarry {
             BlockState bs = bl.getBlock().getState();
             if (bs instanceof Furnace) {
                 Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir.getOppositeFace());
+                furnace.setFacingDirection(dir);
             }
         }
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
@@ -484,7 +484,7 @@ public class Quarry {
             BlockState bs = bl.getBlock().getState();
             if (bs instanceof Furnace) {
                 Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir.getOppositeFace());
+                furnace.setFacingDirection(dir);
             }
         }
 
@@ -555,13 +555,13 @@ public class Quarry {
                             chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.IRON_ORE)).getAmount() - 1);
                         }
                         if (upgrade_slot_1 == 1) {
-                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         if (upgrade_slot_2 == 1) {
-                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         if (upgrade_slot_3 == 1) {
-                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         return true;
                     }
@@ -574,13 +574,13 @@ public class Quarry {
                             chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).setAmount(chest.getInventory().getItem(chest.getInventory().first(Material.GOLD_ORE)).getAmount() - 1);
                         }
                         if (upgrade_slot_1 == 1) {
-                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_1_bl.getWorld().playEffect(upgrade_slot_1_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         if (upgrade_slot_2 == 1) {
-                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_2_bl.getWorld().playEffect(upgrade_slot_2_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         if (upgrade_slot_3 == 1) {
-                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 20);
+                            upgrade_slot_3_bl.getWorld().playEffect(upgrade_slot_3_bl.getLocation().add(0.5, 0.5, 0.5), Effect.MOBSPAWNER_FLAMES, 250);
                         }
                         return true;
                     }

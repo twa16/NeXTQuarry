@@ -247,7 +247,7 @@ public class CustomItems {
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.HOPPER);
         recipe.setIngredient('C', Material.REDSTONE);
-        recipe.setIngredient('C', Material.FURNACE);
+        recipe.setIngredient('D', Material.FURNACE);
         Bukkit.getServer().addRecipe(recipe);
 
     }

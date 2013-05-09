@@ -14,6 +14,7 @@ public class CommandHandler implements CommandExecutor {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
             if (args.length == 1 && args[0].equals("give")) {
                 cs.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
+                return true;
             }
             if (args.length == 2 && args[0].equals("give")) {
                 if (!(cs instanceof Player)) {
