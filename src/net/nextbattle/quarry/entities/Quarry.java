@@ -1384,10 +1384,10 @@ public class Quarry {
         quarrylist.remove(this);
         try {
             for (BlockLocation b : QuarryBlocks) {
-                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
+                b.getBlock().setType(Material.AIR);
             }
             for (BlockLocation b : ArmBlocks) {
-                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
+                b.getBlock().setType(Material.AIR);
             }
             WorldFunctions.processQueue();
         } catch (Exception e) {
