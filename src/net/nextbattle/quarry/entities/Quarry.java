@@ -129,14 +129,13 @@ public class Quarry {
         BlockLocation block_temp_loc = new BlockLocation(block_temp);
         Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, loadfile.getName().replace(".nxtb", ""));
     }
-    
+
     public static boolean isUpgradeBlock(Block b) {
         BlockLocation bl = new BlockLocation(b);
         for (Quarry q : quarrylist) {
-            if (q.upgrade_slot_1_bl.equals(bl) || q.upgrade_slot_2_bl.equals(bl) || q.upgrade_slot_3_bl.equals(bl))
-            {
+            if (q.upgrade_slot_1_bl == bl || q.upgrade_slot_2_bl == bl || q.upgrade_slot_3_bl == bl) {
                 return true;
-            }   
+            }
         }
         return false;
     }
@@ -393,6 +392,11 @@ public class Quarry {
     }
 
     public void doTick() {
+        //Tick Checks
+        if (!cantick) {
+            return;
+        }
+
         //Continue when owner is offline, or is located in unloaded chunk
         if (!block.getBlock().getChunk().isLoaded() && !MainClass.config.continue_when_unloaded) {
             return;
@@ -420,16 +424,28 @@ public class Quarry {
         if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
             if (upgrade_slot_1 == 0 || upgrade_slot_1 == 1) {
                 upgrade_slot_1 = 1;
-                if (upgrade_slot_2 == 1) { upgrade_slot_2 = 0; }
-                if (upgrade_slot_3 == 1) { upgrade_slot_3 = 0; }
+                if (upgrade_slot_2 == 1) {
+                    upgrade_slot_2 = 0;
+                }
+                if (upgrade_slot_3 == 1) {
+                    upgrade_slot_3 = 0;
+                }
             } else if (upgrade_slot_2 == 0 || upgrade_slot_2 == 1) {
                 upgrade_slot_2 = 1;
-                if (upgrade_slot_1 == 1) { upgrade_slot_3 = 0; }
-                if (upgrade_slot_3 == 1) { upgrade_slot_3 = 0; }
+                if (upgrade_slot_1 == 1) {
+                    upgrade_slot_3 = 0;
+                }
+                if (upgrade_slot_3 == 1) {
+                    upgrade_slot_3 = 0;
+                }
             } else if (upgrade_slot_3 == 0 || upgrade_slot_3 == 1) {
                 upgrade_slot_3 = 1;
-                if (upgrade_slot_2 == 1) { upgrade_slot_2 = 0; }
-                if (upgrade_slot_1 == 1) { upgrade_slot_1 = 0; }
+                if (upgrade_slot_2 == 1) {
+                    upgrade_slot_2 = 0;
+                }
+                if (upgrade_slot_1 == 1) {
+                    upgrade_slot_1 = 0;
+                }
             }
         }
 
@@ -497,11 +513,6 @@ public class Quarry {
                 Furnace furnace = (Furnace) bs;
                 furnace.setFacingDirection(dir);
             }
-        }
-
-        //Tick Checks
-        if (!cantick) {
-            return;
         }
 
         if (nextTick > 0) {
@@ -650,7 +661,7 @@ public class Quarry {
                             }
                         }
                         minechest.getBlockInventory().clear();
-                        
+
                     }
                 }
                 if (fuel_inv.firstEmpty() != -1 && is.getType().equals(Material.COAL) && getUpgradeCount(MainClass.citems.fuel_finder_upgrade) > 0) {
@@ -1392,22 +1403,32 @@ public class Quarry {
 
     public Quarry delete() {
         cantick = false;
+
         quarrylist.remove(this);
         try {
             for (BlockLocation b : QuarryBlocks) {
-                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte)0);
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
             }
             for (BlockLocation b : ArmBlocks) {
-                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte)0);
+                WorldFunctions.queueBlock(b.getBlock(), Material.AIR.getId(), (byte) 0);
             }
             WorldFunctions.processQueue();
         } catch (Exception e) {
-            
         }
-        upgrade_slot_1_bl.getBlock().setType(Material.AIR);
-        upgrade_slot_2_bl.getBlock().setType(Material.AIR);
-        upgrade_slot_3_bl.getBlock().setType(Material.AIR);
+        try {
+            upgrade_slot_1_bl.getBlock().setType(Material.AIR);
+        } catch (Exception e) {
+        }
+        try {
+            upgrade_slot_2_bl.getBlock().setType(Material.AIR);
+        } catch (Exception e) {
+        }
+        try {
+            upgrade_slot_3_bl.getBlock().setType(Material.AIR);
+        } catch (Exception e) {
+        }
         file.delete();
+
         return this;
     }
 }

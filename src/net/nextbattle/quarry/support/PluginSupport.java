@@ -12,8 +12,6 @@ public class PluginSupport {
     public Factions fa;
     public CoreProtect cp;
     public LogBlock_ lb;
-    // PLANNED SUPPORT FOR PRISM
-    //public Prism_ pm;
 
     public PluginSupport() {
         init();
@@ -100,13 +98,5 @@ public class PluginSupport {
         } else {
             lb = null;
         }
-        // PLANNED SUPPORT FOR PRISM
-        /*if (Bukkit.getPluginManager().getPlugin("Prism") != null) {
-         pm = new Prism_();
-         MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Prism found & Attatched.");
-
-         } else {
-         pm = null;
-         }*/
     }
 }

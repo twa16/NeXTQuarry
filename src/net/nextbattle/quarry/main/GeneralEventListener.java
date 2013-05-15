@@ -134,10 +134,14 @@ public class GeneralEventListener implements Listener {
                 }
                 evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is);
                 for (ItemStack is2 : q.upgr_inv.getContents()) {
-                    evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                    if (is2 != null) {
+                        evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                    }
                 }
                 for (ItemStack is2 : q.fuel_inv.getContents()) {
-                    evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                    if (is2 != null) {
+                        evt.getBlock().getWorld().dropItemNaturally(evt.getBlock().getLocation(), is2);
+                    }
                 }
                 q.delete();
                 evt.getBlock().setType(Material.AIR);
