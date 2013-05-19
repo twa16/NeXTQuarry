@@ -25,8 +25,6 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.material.Directional;
-import org.bukkit.material.DirectionalContainer;
 
 public class Quarry {
 
@@ -48,6 +46,7 @@ public class Quarry {
     public Inventory upgr_inv;
     private int fuelcounter;
     private int nextTick = 0;
+    private int buildTick = 0;
     private File file;
     private FileConfiguration fc;
     private String random_id;
@@ -99,6 +98,7 @@ public class Quarry {
         int zrealwork_temp = fc_temp.getInt("zrealwork");
         boolean active_temp = fc_temp.getBoolean("active");
         int nextTick_temp = fc_temp.getInt("nextTick");
+        int buildTick_temp = fc_temp.getInt("buildTick");
         int fuelcounter_temp = fc_temp.getInt("fuelcounter");
 
         ArrayList<BlockLocation> ArmBlocks_temp = new ArrayList<>();
@@ -127,7 +127,7 @@ public class Quarry {
         String block_serialized = fc_temp.getString("block");
         block_temp = Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]).getBlockAt(new Location(Bukkit.getServer().getWorld(block_serialized.split("\\$")[0]), Integer.parseInt(block_serialized.split("\\$")[1]), Integer.parseInt(block_serialized.split("\\$")[2]), Integer.parseInt(block_serialized.split("\\$")[3])));
         BlockLocation block_temp_loc = new BlockLocation(block_temp);
-        Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, loadfile.getName().replace(".nxtb", ""));
+        Quarry quarry = new Quarry(fuel_inv_temp, upgr_inv_temp, dir_temp, tier_temp, block_temp_loc, player_temp, ArmBlocks_temp, QuarryBlocks_temp, xwork_temp, ywork_temp, zwork_temp, xrealwork_temp, yrealwork_temp, zrealwork_temp, active_temp, fuelcounter_temp, nextTick_temp, buildTick_temp, loadfile.getName().replace(".nxtb", ""));
     }
 
     public static boolean isUpgradeBlock(Block b) {
@@ -171,6 +171,7 @@ public class Quarry {
         fc.set("active", active);
         fc.set("fuelcounter", fuelcounter);
         fc.set("nextTick", nextTick);
+        fc.set("buildTick", buildTick);
         fc.set("random_id", random_id);
         fc.set("playername", playername);
 
@@ -234,7 +235,7 @@ public class Quarry {
         newFile();
     }
 
-    public Quarry(Inventory fuel_inv, Inventory upgr_inv, BlockFace dir, int tier, BlockLocation block, String playername, ArrayList<BlockLocation> ArmBlocks, ArrayList<BlockLocation> QuarryBlocks, int xwork, int ywork, int zwork, int xrealwork, int yrealwork, int zrealwork, boolean active, int fuelcounter, int nextTick, String random_id) {
+    public Quarry(Inventory fuel_inv, Inventory upgr_inv, BlockFace dir, int tier, BlockLocation block, String playername, ArrayList<BlockLocation> ArmBlocks, ArrayList<BlockLocation> QuarryBlocks, int xwork, int ywork, int zwork, int xrealwork, int yrealwork, int zrealwork, boolean active, int fuelcounter, int nextTick, int buildTick, String random_id) {
         this.fuel_inv = fuel_inv;
         this.upgr_inv = upgr_inv;
         this.dir = dir;
@@ -252,6 +253,7 @@ public class Quarry {
         this.active = active;
         this.fuelcounter = fuelcounter;
         this.nextTick = nextTick;
+        this.buildTick = buildTick;
         this.random_id = random_id;
         this.file = new File(MainClass.plugin.getDataFolder(), "/quarries/" + random_id + ".nxtb");
         this.fc = YamlConfiguration.loadConfiguration(file);
@@ -419,7 +421,12 @@ public class Quarry {
         if (tier == 2) {
             WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
         }
-
+        
+        //Reset upgrade slots
+        upgrade_slot_1 = 0;
+        upgrade_slot_2 = 0;
+        upgrade_slot_3 = 0;
+        
         //Check for upgrades and fill slots
         if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
             if (upgrade_slot_1 == 0 || upgrade_slot_1 == 1) {
@@ -547,18 +554,26 @@ public class Quarry {
         }
 
         //Actions
-        if (!buildFrame(true)) {
-            if (!mineStep()) {
-                drawArm();
+        if (buildTick <= 0) {
+            if (!buildFrame(true)) {
+                buildTick = 4;
             } else {
-                if (trySmelt()) {
-                    fuelcounter -= 2;
-                } else {
-                    fuelcounter -= 1;
-                }
+                WorldFunctions.processQueue();
+                return;
+            }
+        } else {
+            buildTick -= 1;
+        }
+        
+        if (!mineStep()) {
+            drawArm();
+        } else {
+            if (trySmelt()) {
+                fuelcounter -= 2;
+            } else {
+                fuelcounter -= 1;
             }
         }
-
         WorldFunctions.processQueue();
     }
 
@@ -567,7 +582,9 @@ public class Quarry {
             Location loc2 = block.getLocation();
             loc2.add(0, 1, 0);
             BlockState blockState = block.getWorld().getBlockAt(loc2).getState();
-            if (blockState instanceof Chest) {
+            if (blockState == null) { return false; }
+            if (blockState instanceof Chest)
+            {
                 Chest chest = (Chest) blockState;
                 if (chest.getInventory().contains(Material.IRON_ORE)) {
                     if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(Material.IRON_INGOT))) {

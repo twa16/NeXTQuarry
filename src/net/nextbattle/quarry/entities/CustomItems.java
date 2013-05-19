@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.entities;
 
 import java.util.ArrayList;
@@ -13,10 +9,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.ShapedRecipe;
 import org.bukkit.inventory.meta.ItemMeta;
 
-/**
- *
- * @author Bodhi
- */
 public class CustomItems {
 
     public ItemStack quarry_tier1;
@@ -180,7 +172,7 @@ public class CustomItems {
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.HOPPER);
-        recipe.setIngredient('D', Material.IRON_PICKAXE);
+        recipe.setIngredient('D', Material.DIAMOND_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
 
         //Tier 2 Quarry
@@ -189,7 +181,7 @@ public class CustomItems {
         recipe.setIngredient('A', Material.GOLD_INGOT);
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.HOPPER);
-        recipe.setIngredient('D', Material.GOLD_PICKAXE);
+        recipe.setIngredient('D', Material.DIAMOND_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
 
         //Tier 3 Quarry

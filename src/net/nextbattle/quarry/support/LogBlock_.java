@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package net.nextbattle.quarry.support;
 
 import de.diddiz.LogBlock.Consumer;
@@ -9,10 +5,6 @@ import de.diddiz.LogBlock.LogBlock;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
-/**
- *
- * @author Bodhi
- */
 public class LogBlock_ {
     private Consumer lbconsumer;
     
