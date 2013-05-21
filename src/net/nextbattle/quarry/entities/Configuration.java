@@ -34,6 +34,7 @@ public class Configuration {
     public int maxquarriestier2 = 8;
     public int maxquarriestier3 = 8;
     public int user_max_quarries = 24;
+    public int save_interval = 60;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -80,7 +81,8 @@ public class Configuration {
         MainClass.config.world_whitelist_enabled = fc.getBoolean("world-whitelist-enabled");
         MainClass.config.draw_all_beams = fc.getBoolean("draw-all-beams");
         MainClass.config.user_max_quarries = fc.getInt("user-max-quarries");
-
+        MainClass.config.save_interval = fc.getInt("save-interval");
+        if (MainClass.config.save_interval == 0) { MainClass.config.save_interval = 60; }
     }
 
     public Configuration() {
