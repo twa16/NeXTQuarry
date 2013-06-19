@@ -13,19 +13,19 @@ public class CommandHandler implements CommandExecutor {
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] args) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
             if (args.length == 1 && args[0].equals("give")) {
-                cs.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
+                cs.sendMessage(ChatColor.GOLD + MainClass.lang.itemlist + " tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
                 return true;
             }
             if (args.length == 2 && args[0].equals("give")) {
                 if (!(cs instanceof Player)) {
-                    cs.sendMessage(ChatColor.GOLD + "You can't execute this command from the console.");
+                    cs.sendMessage(ChatColor.GOLD + MainClass.lang.noconsole);
                     return false;
                 }
                 
                 Player p = (Player) cs;
 
                 if (!p.hasPermission("nextquarry.admin")) {
-                    cs.sendMessage(ChatColor.GOLD + "You are not allowed to execute this command with the give parameter!");
+                    cs.sendMessage(ChatColor.GOLD + MainClass.lang.nogiveperm);
                     return true;
                 }
                 if (args[1].equals("tier1")) {
@@ -51,66 +51,67 @@ public class CommandHandler implements CommandExecutor {
                 }  else if (args[1].equals("liquidminer")) {
                     p.getInventory().addItem(MainClass.citems.liquid_miner);
                 } else {
-                    p.sendMessage(ChatColor.GOLD + "This item does not exist!");
-                    p.sendMessage(ChatColor.GOLD + "Items to choose from: tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
+                    p.sendMessage(ChatColor.GOLD + MainClass.lang.itemnoexist);
+                    p.sendMessage(ChatColor.GOLD + MainClass.lang.itemlist+ " tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
                 }
                 return true;
             }
 
-            cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Plugin Info]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.5.1 - Coded by BeMacized");
-            cs.sendMessage(ChatColor.GOLD + "Website: http://www.nextbattle.net/");
+            cs.sendMessage(ChatColor.GOLD + "----["+MainClass.lang.plugininfo+"]----");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.6.0 - "+MainClass.lang.codedby+" AutumnDusk");
+            cs.sendMessage(ChatColor.GOLD + MainClass.lang.website + " http://www.autumndusk.net/");
+            cs.sendMessage(ChatColor.GOLD + "BukkitDev: http://dev.bukkit.org/server-mods/nextquarry/");
             if (cs instanceof Player) {
                 Player p = (Player) cs;
-                cs.sendMessage(ChatColor.GOLD + "----[NeXTQuarry Permissions]----");
+                cs.sendMessage(ChatColor.GOLD + "----["+MainClass.lang.perms+"]----");
                 if (p.hasPermission("nextquarry.user.tier1")) {
-                    cs.sendMessage(ChatColor.GREEN + "You are allowed to place tier 1 quarries.");
+                    cs.sendMessage(ChatColor.GREEN + MainClass.lang.tier1allow);
                 } else {
-                    cs.sendMessage(ChatColor.RED + "You are NOT allowed to place tier 1 quarries.");
+                    cs.sendMessage(ChatColor.RED + MainClass.lang.tier1deny);
                 }
                 if (p.hasPermission("nextquarry.user.tier2")) {
-                    cs.sendMessage(ChatColor.GREEN + "You are allowed to place tier 2 quarries.");
+                    cs.sendMessage(ChatColor.GREEN + MainClass.lang.tier2allow);
                 } else {
-                    cs.sendMessage(ChatColor.RED + "You are NOT allowed to place tier 2 quarries.");
+                    cs.sendMessage(ChatColor.RED + MainClass.lang.tier2deny);
                 }
                 if (p.hasPermission("nextquarry.user.tier3")) {
-                    cs.sendMessage(ChatColor.GREEN + "You are allowed to place tier 3 quarries.");
+                    cs.sendMessage(ChatColor.GREEN + MainClass.lang.tier3allow);
                 } else {
-                    cs.sendMessage(ChatColor.RED + "You are NOT allowed to place tier 3 quarries.");
+                    cs.sendMessage(ChatColor.RED + MainClass.lang.tier3deny);
                 }
                 if (MainClass.config.privatequarries) {
                     if (p.hasPermission("nextquarry.admin")) {
-                        cs.sendMessage(ChatColor.GREEN + "You are allowed to break all quarries.");
-                        cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");
+                        cs.sendMessage(ChatColor.GREEN + MainClass.lang.breakallquarries);
+                        cs.sendMessage(ChatColor.GREEN + MainClass.lang.editallquarries);
                     } else if (p.hasPermission("nextquarry.user.remove")) {
-                        cs.sendMessage(ChatColor.GOLD + "You are allowed to break YOUR quarries only.");
+                        cs.sendMessage(ChatColor.GOLD + MainClass.lang.breakprivatequarries);
                         if (p.hasPermission("nextquarry.user.edit")) {
-                            cs.sendMessage(ChatColor.GOLD + "You are allowed to edit YOUR quarries only.");
+                            cs.sendMessage(ChatColor.GOLD + MainClass.lang.editprivatequarries);
                         } else {
-                            cs.sendMessage(ChatColor.RED + "You are NOT allowed to edit quarries.");
+                            cs.sendMessage(ChatColor.RED + MainClass.lang.noeditquarries);
                         }
                     } else {
-                        cs.sendMessage(ChatColor.RED + "You are NOT allowed to break quarries.");
+                        cs.sendMessage(ChatColor.RED + MainClass.lang.nobreakquarries);
                         if (p.hasPermission("nextquarry.user.edit")) {
-                            cs.sendMessage(ChatColor.GOLD + "You are allowed to edit YOUR quarries only.");
+                            cs.sendMessage(ChatColor.GOLD + MainClass.lang.editprivatequarries);
                         } else {
-                            cs.sendMessage(ChatColor.RED + "You are NOT allowed to edit quarries.");
+                            cs.sendMessage(ChatColor.RED + MainClass.lang.noeditquarries);
                         }
                     }
 
                 } else {
                     if (p.hasPermission("nextquarry.admin")) {
-                        cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");
+                        cs.sendMessage(ChatColor.GREEN + MainClass.lang.editallquarries);
                     }
                     if (p.hasPermission("nextquarry.admin") || p.hasPermission("nextquarry.user.remove")) {
-                        cs.sendMessage(ChatColor.GREEN + "You are allowed to break all quarries.");
+                        cs.sendMessage(ChatColor.GREEN + MainClass.lang.breakallquarries);
                     } else {
-                        cs.sendMessage(ChatColor.RED + "You are NOT allowed to break quarries.");
+                        cs.sendMessage(ChatColor.RED + MainClass.lang.nobreakquarries);
                     }
                     if (p.hasPermission("nextquarry.user.edit")) {
-                        cs.sendMessage(ChatColor.GREEN + "You are allowed to edit all quarries.");
+                        cs.sendMessage(ChatColor.GREEN + MainClass.lang.editallquarries);
                     } else {
-                        cs.sendMessage(ChatColor.RED + "You are NOT allowed to edit quarries.");
+                        cs.sendMessage(ChatColor.RED + MainClass.lang.noeditquarries);
                     }
                 }
             }

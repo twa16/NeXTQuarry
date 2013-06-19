@@ -6,6 +6,7 @@ import java.util.logging.Level;
 import net.nextbattle.quarry.entities.CommandHandler;
 import net.nextbattle.quarry.entities.Configuration;
 import net.nextbattle.quarry.entities.CustomItems;
+import net.nextbattle.quarry.entities.Language;
 import net.nextbattle.quarry.entities.Quarry;
 import net.nextbattle.quarry.metrics.Metrics;
 import net.nextbattle.quarry.support.PluginSupport;
@@ -22,6 +23,7 @@ public final class MainClass extends JavaPlugin {
     public static int savetimer;
     public static CommandHandler ch;
     public static PluginSupport ps;
+    public static Language lang;
 
     public static void main(String[] args) {
         System.out.println("NeXTQuarry is a plugin for MineCraft servers based on CraftBukkit.");
@@ -33,7 +35,7 @@ public final class MainClass extends JavaPlugin {
     public void onEnable() {
         //Define plugin
         plugin = this;
-
+        
         //Event Listener
         getServer().getPluginManager().registerEvents(new GeneralEventListener(), plugin);
 
@@ -45,6 +47,12 @@ public final class MainClass extends JavaPlugin {
         if (!quarrydir.exists()) {
             quarrydir.mkdir();
         }
+        
+        //Languages
+        if (!(new File(plugin.getDataFolder(), "lang.yml")).exists()) {
+            plugin.saveResource("lang.yml", false);
+        }
+        Language.loadFile();
 
         //Initialize Command Handler
         ch = new CommandHandler();
@@ -107,9 +115,9 @@ public final class MainClass extends JavaPlugin {
         savetimer = getServer().getScheduler().scheduleSyncRepeatingTask(this, new Runnable() {
             @Override
             public void run() {
-                getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
+                getServer().getLogger().log(Level.INFO, "NeXTQuarry: " + lang.saving);
                 Quarry.saveAll();
-                getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
+                getServer().getLogger().log(Level.INFO, "NeXTQuarry: " + lang.saved);
             }
         }, 20L * (config.save_interval), 20L * (config.save_interval));
     }
@@ -118,8 +126,8 @@ public final class MainClass extends JavaPlugin {
     public void onDisable() {
         getServer().getScheduler().cancelTask(timer);
         getServer().getScheduler().cancelTask(savetimer);
-        getServer().getLogger().log(Level.INFO, "NeXTQuarry: Saving quarries...");
+        getServer().getLogger().log(Level.INFO, "NeXTQuarry: " + lang.saving);
         Quarry.saveAll();
-        getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
+        getServer().getLogger().log(Level.INFO, "NeXTQuarry: " + lang.saved);
     }
 }

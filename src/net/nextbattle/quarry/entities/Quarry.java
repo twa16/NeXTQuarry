@@ -61,14 +61,14 @@ public class Quarry {
     public static void LoadQuarry(File loadfile) {
         FileConfiguration fc_temp = YamlConfiguration.loadConfiguration(loadfile);
         List<?> list = fc_temp.getList("fuel_inv");
-        Inventory fuel_inv_temp = Bukkit.createInventory(null, 27, "Quarry: Fuel Bay");
+        Inventory fuel_inv_temp = Bukkit.createInventory(null, 27, MainClass.lang.fuel_bay);
         if (list != null) {
             for (int i = 0; i < Math.min(list.size(), fuel_inv_temp.getSize()); i++) {
                 fuel_inv_temp.setItem(i, (ItemStack) list.get(i));
             }
         }
         list = fc_temp.getList("upgr_inv");
-        Inventory upgr_inv_temp = Bukkit.createInventory(null, 27, "Quarry: Upgrade Slots");
+        Inventory upgr_inv_temp = Bukkit.createInventory(null, 27, MainClass.lang.upgr_bay);
         if (list != null) {
             for (int i = 0; i < Math.min(list.size(), upgr_inv_temp.getSize()); i++) {
                 upgr_inv_temp.setItem(i, (ItemStack) list.get(i));
@@ -228,8 +228,8 @@ public class Quarry {
         this.playername = p.getName();
         QuarryBlocks = new ArrayList<>();
         ArmBlocks = new ArrayList<>();
-        fuel_inv = Bukkit.createInventory(null, 27, "Quarry: Fuel Bay");
-        upgr_inv = Bukkit.createInventory(null, 27, "Quarry: Upgrade Slots");
+        fuel_inv = Bukkit.createInventory(null, 27, MainClass.lang.fuel_bay);
+        upgr_inv = Bukkit.createInventory(null, 27, MainClass.lang.upgr_bay);
         fuelcounter = 0;
         quarrylist.add(this);
         newFile();

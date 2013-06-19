@@ -32,42 +32,42 @@ public class CustomItems {
         //Fuel Efficiency Upgrade
         is = new ItemStack(MainClass.config.fuel_efficiency_upgrade, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Fuel Efficiency Upgrade");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.fuel_efficiency_upgrade);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Makes the quarry last longer per unit of fuel");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 3 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.fuel_efficiency_upgrade_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.fuel_efficiency_upgrade_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_efficiency_upgrade = is;
-        
+
         //Smelter Upgrade
         is = new ItemStack(MainClass.config.smelter_upgrade, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Smelter Upgrade");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.smelter_upgrade);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Gives the quarry the ability to smelt ores");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.smelter_upgrade_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.smelter_upgrade_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         smelter_upgrade = is;
-        
+
         //Liquid Miner
         is = new ItemStack(MainClass.config.liquid_miner, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Liquid Miner");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.liquid_miner);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Allows buckets to be filled with found liquids");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.liquid_miner_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.liquid_miner_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         liquid_miner = is;
-        
+
         //Tier 1 Quarry
         is = new ItemStack(Material.IRON_BLOCK, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GRAY + "Quarry [Tier 1]");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GRAY + MainClass.lang.tier1_quarry);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_1_size+"x"+MainClass.config.tier_1_size+" area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.mines_a + " " + MainClass.config.tier_1_size + "x" + MainClass.config.tier_1_size + " " + MainClass.lang.area);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier1 = is;
@@ -75,9 +75,9 @@ public class CustomItems {
         //Tier 2 Quarry
         is = new ItemStack(Material.GOLD_BLOCK, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + "Quarry [Tier 2]");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.tier2_quarry);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_2_size+"x"+MainClass.config.tier_2_size+" area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.mines_a + " " + MainClass.config.tier_2_size + "x" + MainClass.config.tier_2_size + " " + MainClass.lang.area);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier2 = is;
@@ -85,9 +85,9 @@ public class CustomItems {
         //Tier 3 Quarry
         is = new ItemStack(Material.OBSIDIAN, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.AQUA + "Quarry [Tier 3]");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.AQUA + MainClass.lang.tier3_quarry);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_3_size+"x"+MainClass.config.tier_3_size+" area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.mines_a + " " + MainClass.config.tier_3_size + "x" + MainClass.config.tier_3_size + " " + MainClass.lang.area);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier3 = is;
@@ -95,10 +95,10 @@ public class CustomItems {
         //Speed Upgrade
         is = new ItemStack(MainClass.config.speed_upgrade, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Quarry Speed Upgrade");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.speed_upgrade);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Makes the quarry a bit faster");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 3 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.speed_upgrade_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.speed_upgrade_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         speed_upgrade = is;
@@ -106,10 +106,10 @@ public class CustomItems {
         //Fuel Finder Upgrade
         is = new ItemStack(MainClass.config.fuel_finder_upgrade, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Quarry Fuel Finder");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.fuel_finder);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Automatically transfers coal found to the fuel bay");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.fuel_finder_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.fuel_finder_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_finder_upgrade = is;
@@ -117,9 +117,9 @@ public class CustomItems {
         //Wrench Tool
         is = new ItemStack(MainClass.config.wrench_tool, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + "Quarry Wrench");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + MainClass.lang.quarry_wrench);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Right click a quarry with this to apply upgrades!");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.quarry_wrench_desc);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         wrench_tool = is;
@@ -127,9 +127,9 @@ public class CustomItems {
         //Fuel Tool
         is = new ItemStack(MainClass.config.fuel_tool, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + "Quarry Fuel Injector");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.YELLOW + MainClass.lang.fuel_injector);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Right click a quarry with this to inject fuel!");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.fuel_injector_desc);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         fuel_tool = is;
@@ -137,14 +137,14 @@ public class CustomItems {
         //Chest Miner
         is = new ItemStack(MainClass.config.chest_miner, 1);
         meta = is.getItemMeta();
-        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + "Chest Mining Upgrade");
+        meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GREEN + MainClass.lang.chest_miner);
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Allows you to mine the contents of chests.");
-        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + "Max 1 per quarry");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + MainClass.lang.chest_miner_desc);
+        lorelist.add(ChatColor.RESET + "" + ChatColor.RED + MainClass.lang.chest_miner_limit);
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         chest_miner = is;
-        
+
     }
 
     public void addRecipes() {
@@ -158,14 +158,14 @@ public class CustomItems {
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.DIAMOND);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Liquid Miner
         recipe = new ShapedRecipe(liquid_miner);
         recipe.shape("A A", "A A", " B ");
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.BUCKET);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Tier 1 Quarry
         recipe = new ShapedRecipe(quarry_tier1);
         recipe.shape("ABA", "ACA", "ADA");
@@ -232,7 +232,7 @@ public class CustomItems {
         recipe.setIngredient('B', Material.GOLD_HOE);
         recipe.setIngredient('C', Material.CHEST);
         Bukkit.getServer().addRecipe(recipe);
-        
+
         //Smelter upgrade
         recipe = new ShapedRecipe(smelter_upgrade);
         recipe.shape("ABA", "CDA", "ABA");
@@ -243,9 +243,8 @@ public class CustomItems {
         Bukkit.getServer().addRecipe(recipe);
 
     }
-    
-    public static boolean customItemsMatch(ItemStack first, ItemStack second)
-    {
+
+    public static boolean customItemsMatch(ItemStack first, ItemStack second) {
         if (first.getItemMeta().equals(second.getItemMeta())) {
             return true;
         }
