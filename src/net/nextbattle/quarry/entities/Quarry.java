@@ -421,12 +421,12 @@ public class Quarry {
         if (tier == 2) {
             WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
         }
-        
+
         //Reset upgrade slots
         upgrade_slot_1 = 0;
         upgrade_slot_2 = 0;
         upgrade_slot_3 = 0;
-        
+
         //Check for upgrades and fill slots
         if (getUpgradeCount(MainClass.citems.smelter_upgrade) > 0) {
             if (upgrade_slot_1 == 0 || upgrade_slot_1 == 1) {
@@ -567,7 +567,7 @@ public class Quarry {
         } else {
             buildTick -= 1;
         }
-        
+
         if (!mineStep()) {
             drawArm();
         } else {
@@ -585,9 +585,10 @@ public class Quarry {
             Location loc2 = block.getLocation();
             loc2.add(0, 1, 0);
             BlockState blockState = block.getWorld().getBlockAt(loc2).getState();
-            if (blockState == null) { return false; }
-            if (blockState instanceof Chest)
-            {
+            if (blockState == null) {
+                return false;
+            }
+            if (blockState instanceof Chest) {
                 Chest chest = (Chest) blockState;
                 if (chest.getInventory().contains(Material.IRON_ORE)) {
                     if (PlayerFunctions.addItems(chest.getInventory(), new ItemStack(Material.IRON_INGOT))) {
@@ -1139,14 +1140,14 @@ public class Quarry {
         if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
             int holesize = 0;
             if (tier == 0) {
-            holesize = MainClass.config.tier_1_size;
-        }
-        if (tier == 1) {
-            holesize = MainClass.config.tier_2_size;
-        }
-        if (tier == 2) {
-            holesize = MainClass.config.tier_3_size;
-        }
+                holesize = MainClass.config.tier_1_size;
+            }
+            if (tier == 1) {
+                holesize = MainClass.config.tier_2_size;
+            }
+            if (tier == 2) {
+                holesize = MainClass.config.tier_3_size;
+            }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1194,14 +1195,14 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             int holesize = 0;
             if (tier == 0) {
-            holesize = MainClass.config.tier_1_size;
-        }
-        if (tier == 1) {
-            holesize = MainClass.config.tier_2_size;
-        }
-        if (tier == 2) {
-            holesize = MainClass.config.tier_3_size;
-        }
+                holesize = MainClass.config.tier_1_size;
+            }
+            if (tier == 1) {
+                holesize = MainClass.config.tier_2_size;
+            }
+            if (tier == 2) {
+                holesize = MainClass.config.tier_3_size;
+            }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1250,14 +1251,14 @@ public class Quarry {
         if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
             int holesize = 0;
             if (tier == 0) {
-            holesize = MainClass.config.tier_1_size;
-        }
-        if (tier == 1) {
-            holesize = MainClass.config.tier_2_size;
-        }
-        if (tier == 2) {
-            holesize = MainClass.config.tier_3_size;
-        }
+                holesize = MainClass.config.tier_1_size;
+            }
+            if (tier == 1) {
+                holesize = MainClass.config.tier_2_size;
+            }
+            if (tier == 2) {
+                holesize = MainClass.config.tier_3_size;
+            }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1306,14 +1307,14 @@ public class Quarry {
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             int holesize = 0;
             if (tier == 0) {
-            holesize = MainClass.config.tier_1_size;
-        }
-        if (tier == 1) {
-            holesize = MainClass.config.tier_2_size;
-        }
-        if (tier == 2) {
-            holesize = MainClass.config.tier_3_size;
-        }
+                holesize = MainClass.config.tier_1_size;
+            }
+            if (tier == 1) {
+                holesize = MainClass.config.tier_2_size;
+            }
+            if (tier == 2) {
+                holesize = MainClass.config.tier_3_size;
+            }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {

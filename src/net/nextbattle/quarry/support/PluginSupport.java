@@ -71,28 +71,28 @@ public class PluginSupport {
     }
 
     private void init() {
-        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null) {
+        if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && MainClass.config.worldguard_enabled) {
             wg = new WorldGuard();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] WorldGuard found & Attatched.");
 
         } else {
             wg = null;
         }
-        if (Bukkit.getPluginManager().getPlugin("Factions") != null) {
+        if (Bukkit.getPluginManager().getPlugin("Factions") != null && MainClass.config.factions_enabled) {
             fa = new Factions();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Factions found & Attatched.");
 
         } else {
             fa = null;
         }
-        if (Bukkit.getPluginManager().getPlugin("CoreProtect") != null) {
+        if (Bukkit.getPluginManager().getPlugin("CoreProtect") != null && MainClass.config.coreprotect_enabled) {
             cp = new CoreProtect();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] CoreProtect found & Attatched.");
 
         } else {
             cp = null;
         }
-        if (Bukkit.getPluginManager().getPlugin("LogBlock") != null) {
+        if (Bukkit.getPluginManager().getPlugin("LogBlock") != null  && MainClass.config.logblock_enabled) {
             lb = new LogBlock_();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] LogBlock found & Attatched.");
         } else {

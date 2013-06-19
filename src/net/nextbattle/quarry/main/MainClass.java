@@ -111,7 +111,7 @@ public final class MainClass extends JavaPlugin {
                 Quarry.saveAll();
                 getServer().getLogger().log(Level.INFO, "NeXTQuarry: All quarries saved.");
             }
-        }, 20L*(config.save_interval), 20L*(config.save_interval));
+        }, 20L * (config.save_interval), 20L * (config.save_interval));
     }
 
     @Override

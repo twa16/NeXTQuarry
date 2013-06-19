@@ -73,3 +73,12 @@ world-whitelist-enabled: false
 world-whitelist:
 - 'world'
 
+# -- PLUGIN SUPPORT --
+#Plugin toggle: Gives you the ability to disable support for supported plugins, even when you have them installed.
+coreprotect-enabled: true
+logblock-enabled: true
+factions-enabled: true
+worldguard-enabled: true
+
+
+

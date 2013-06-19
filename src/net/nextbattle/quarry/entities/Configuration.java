@@ -38,6 +38,10 @@ public class Configuration {
     public int tier_1_size = 16;
     public int tier_2_size = 32;
     public int tier_3_size = 48;
+    public boolean coreprotect_enabled = true;
+    public boolean logblock_enabled = true;
+    public boolean factions_enabled = true;
+    public boolean worldguard_enabled = true;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -88,7 +92,13 @@ public class Configuration {
         MainClass.config.tier_1_size = fc.getInt("tier-1-size");
         MainClass.config.tier_2_size = fc.getInt("tier-2-size");
         MainClass.config.tier_3_size = fc.getInt("tier-3-size");
-        if (MainClass.config.save_interval == 0) { MainClass.config.save_interval = 60; }
+        MainClass.config.coreprotect_enabled = fc.getBoolean("coreprotect-enabled");
+        MainClass.config.factions_enabled = fc.getBoolean("factions-enabled");
+        MainClass.config.worldguard_enabled = fc.getBoolean("worldguard-enabled");
+        MainClass.config.logblock_enabled = fc.getBoolean("logblock-enabled");
+        if (MainClass.config.save_interval == 0) {
+            MainClass.config.save_interval = 60;
+        }
     }
 
     public Configuration() {
