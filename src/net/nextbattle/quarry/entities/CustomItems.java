@@ -172,7 +172,7 @@ public class CustomItems {
         recipe.setIngredient('A', Material.IRON_INGOT);
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.HOPPER);
-        recipe.setIngredient('D', Material.DIAMOND_PICKAXE);
+        recipe.setIngredient('D', Material.IRON_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
 
         //Tier 2 Quarry
@@ -181,7 +181,7 @@ public class CustomItems {
         recipe.setIngredient('A', Material.GOLD_INGOT);
         recipe.setIngredient('B', Material.REDSTONE);
         recipe.setIngredient('C', Material.HOPPER);
-        recipe.setIngredient('D', Material.DIAMOND_PICKAXE);
+        recipe.setIngredient('D', Material.GOLD_PICKAXE);
         Bukkit.getServer().addRecipe(recipe);
 
         //Tier 3 Quarry
