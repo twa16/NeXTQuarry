@@ -100,7 +100,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent evt) {
         try {
-            if (Quarry.isUpgradeBlock(evt.getBlock())) {
+            if (Quarry.isUpgradeBlock(evt.getBlock())) {                
                 evt.setCancelled(true);
                 return;
             }

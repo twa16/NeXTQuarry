@@ -133,7 +133,7 @@ public class Quarry {
     public static boolean isUpgradeBlock(Block b) {
         BlockLocation bl = new BlockLocation(b);
         for (Quarry q : quarrylist) {
-            if (q.upgrade_slot_1_bl == bl || q.upgrade_slot_2_bl == bl || q.upgrade_slot_3_bl == bl) {
+            if (q.upgrade_slot_1_bl.equals(bl) || q.upgrade_slot_2_bl.equals(bl) || q.upgrade_slot_3_bl.equals(bl)) {
                 return true;
             }
         }
@@ -479,6 +479,7 @@ public class Quarry {
                 furnace.setFacingDirection(dir);
             }
         }
+        upgrade_slot_1_bl = bl;
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 2, block.getY(), block.getZ(), block.getWorld());
         }
@@ -500,6 +501,7 @@ public class Quarry {
                 furnace.setFacingDirection(dir);
             }
         }
+        upgrade_slot_2_bl = bl;
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 3, block.getY(), block.getZ(), block.getWorld());
         }
@@ -521,6 +523,7 @@ public class Quarry {
                 furnace.setFacingDirection(dir);
             }
         }
+        upgrade_slot_3_bl = bl;
 
         if (nextTick > 0) {
             nextTick -= 1;
