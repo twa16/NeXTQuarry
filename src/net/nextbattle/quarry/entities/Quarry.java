@@ -657,13 +657,13 @@ public class Quarry {
         int yfinal = block.getY();
         int holesize = 0;
         if (tier == 0) {
-            holesize = 16;
+            holesize = MainClass.config.tier_1_size;
         }
         if (tier == 1) {
-            holesize = 32;
+            holesize = MainClass.config.tier_2_size;
         }
         if (tier == 2) {
-            holesize = 48;
+            holesize = MainClass.config.tier_3_size;
         }
         Location loc2 = block.getLocation();
         loc2.add(0, 1, 0);
@@ -770,13 +770,13 @@ public class Quarry {
         active = true;
         int holesize = 0;
         if (tier == 0) {
-            holesize = 16;
+            holesize = MainClass.config.tier_1_size;
         }
         if (tier == 1) {
-            holesize = 32;
+            holesize = MainClass.config.tier_2_size;
         }
         if (tier == 2) {
-            holesize = 48;
+            holesize = MainClass.config.tier_3_size;
         }
         //No change? No redraw!
         if (xwork == xrealwork && ywork == yrealwork && zwork == zrealwork) {
@@ -1139,14 +1139,14 @@ public class Quarry {
         if (dir == BlockFace.NORTH || dir == BlockFace.NORTH_EAST) {
             int holesize = 0;
             if (tier == 0) {
-                holesize = 16;
-            }
-            if (tier == 1) {
-                holesize = 32;
-            }
-            if (tier == 2) {
-                holesize = 48;
-            }
+            holesize = MainClass.config.tier_1_size;
+        }
+        if (tier == 1) {
+            holesize = MainClass.config.tier_2_size;
+        }
+        if (tier == 2) {
+            holesize = MainClass.config.tier_3_size;
+        }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1194,14 +1194,14 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             int holesize = 0;
             if (tier == 0) {
-                holesize = 16;
-            }
-            if (tier == 1) {
-                holesize = 32;
-            }
-            if (tier == 2) {
-                holesize = 48;
-            }
+            holesize = MainClass.config.tier_1_size;
+        }
+        if (tier == 1) {
+            holesize = MainClass.config.tier_2_size;
+        }
+        if (tier == 2) {
+            holesize = MainClass.config.tier_3_size;
+        }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1250,14 +1250,14 @@ public class Quarry {
         if (dir == BlockFace.SOUTH || dir == BlockFace.SOUTH_WEST) {
             int holesize = 0;
             if (tier == 0) {
-                holesize = 16;
-            }
-            if (tier == 1) {
-                holesize = 32;
-            }
-            if (tier == 2) {
-                holesize = 48;
-            }
+            holesize = MainClass.config.tier_1_size;
+        }
+        if (tier == 1) {
+            holesize = MainClass.config.tier_2_size;
+        }
+        if (tier == 2) {
+            holesize = MainClass.config.tier_3_size;
+        }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {
@@ -1306,14 +1306,14 @@ public class Quarry {
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             int holesize = 0;
             if (tier == 0) {
-                holesize = 16;
-            }
-            if (tier == 1) {
-                holesize = 32;
-            }
-            if (tier == 2) {
-                holesize = 48;
-            }
+            holesize = MainClass.config.tier_1_size;
+        }
+        if (tier == 1) {
+            holesize = MainClass.config.tier_2_size;
+        }
+        if (tier == 2) {
+            holesize = MainClass.config.tier_3_size;
+        }
             World world = block.getWorld();
             for (int x = 0; x < (holesize + 2); x++) {
                 for (int z = 0; z < (holesize + 2); z++) {

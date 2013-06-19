@@ -35,6 +35,9 @@ public class Configuration {
     public int maxquarriestier3 = 8;
     public int user_max_quarries = 24;
     public int save_interval = 60;
+    public int tier_1_size = 16;
+    public int tier_2_size = 32;
+    public int tier_3_size = 48;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -82,6 +85,9 @@ public class Configuration {
         MainClass.config.draw_all_beams = fc.getBoolean("draw-all-beams");
         MainClass.config.user_max_quarries = fc.getInt("user-max-quarries");
         MainClass.config.save_interval = fc.getInt("save-interval");
+        MainClass.config.tier_1_size = fc.getInt("tier-1-size");
+        MainClass.config.tier_2_size = fc.getInt("tier-2-size");
+        MainClass.config.tier_3_size = fc.getInt("tier-3-size");
         if (MainClass.config.save_interval == 0) { MainClass.config.save_interval = 60; }
     }
 

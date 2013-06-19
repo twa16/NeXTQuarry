@@ -68,7 +68,7 @@ public final class MainClass extends JavaPlugin {
         try {
             Updater updater = null;
             if (config.autoupdate) {
-                updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.DEFAULT, true); //TODO: NOTIFY UPDATE BUT NO UPDATE FEATURE
+                updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.DEFAULT, true);
                 Updater.updateResultCustom(updater);
             } else if (config.autoupdate) {
                 updater = new Updater(this, "nextquarry", this.getFile(), Updater.UpdateType.NO_DOWNLOAD, true);

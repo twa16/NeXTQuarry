@@ -67,7 +67,7 @@ public class CustomItems {
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GRAY + "Quarry [Tier 1]");
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a 16x16 area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_1_size+"x"+MainClass.config.tier_1_size+" area");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier1 = is;
@@ -77,7 +77,7 @@ public class CustomItems {
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.GOLD + "Quarry [Tier 2]");
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a 32x32 area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_2_size+"x"+MainClass.config.tier_2_size+" area");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier2 = is;
@@ -87,7 +87,7 @@ public class CustomItems {
         meta = is.getItemMeta();
         meta.setDisplayName(ChatColor.RESET + "" + ChatColor.AQUA + "Quarry [Tier 3]");
         lorelist = new ArrayList<String>();
-        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a 48x48 area");
+        lorelist.add(ChatColor.RESET + "" + ChatColor.GOLD + "Mines a "+MainClass.config.tier_3_size+"x"+MainClass.config.tier_3_size+" area");
         meta.setLore(lorelist);
         is.setItemMeta(meta);
         quarry_tier3 = is;
