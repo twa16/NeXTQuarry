@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.functions;
+package net.autumndusk.nextquarry.functions;
 
 import java.util.HashMap;
 import org.bukkit.inventory.Inventory;

@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package net.nextbattle.quarry.entities;
+package net.autumndusk.nextquarry.entities;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import net.nextbattle.quarry.main.MainClass;
+import net.autumndusk.nextquarry.main.MainClass;
 import org.bukkit.Material;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;

@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.support;
+package net.autumndusk.nextquarry.support;
 
 import net.coreprotect.CoreProtectAPI;
 import org.bukkit.Bukkit;

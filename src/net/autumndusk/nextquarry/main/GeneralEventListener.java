@@ -1,8 +1,8 @@
-package net.nextbattle.quarry.main;
+package net.autumndusk.nextquarry.main;
 
-import net.nextbattle.quarry.entities.CustomItems;
-import net.nextbattle.quarry.entities.Quarry;
-import net.nextbattle.quarry.functions.WorldFunctions;
+import net.autumndusk.nextquarry.entities.CustomItems;
+import net.autumndusk.nextquarry.entities.Quarry;
+import net.autumndusk.nextquarry.functions.WorldFunctions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

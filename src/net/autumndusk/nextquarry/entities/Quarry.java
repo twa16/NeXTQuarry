@@ -1,15 +1,15 @@
-package net.nextbattle.quarry.entities;
+package net.autumndusk.nextquarry.entities;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
-import net.nextbattle.quarry.functions.PlayerFunctions;
-import net.nextbattle.quarry.functions.StringFunctions;
-import net.nextbattle.quarry.functions.WorldFunctions;
-import net.nextbattle.quarry.main.MainClass;
-import net.nextbattle.quarry.types.BlockLocation;
+import net.autumndusk.nextquarry.functions.PlayerFunctions;
+import net.autumndusk.nextquarry.functions.StringFunctions;
+import net.autumndusk.nextquarry.functions.WorldFunctions;
+import net.autumndusk.nextquarry.main.MainClass;
+import net.autumndusk.nextquarry.types.BlockLocation;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;

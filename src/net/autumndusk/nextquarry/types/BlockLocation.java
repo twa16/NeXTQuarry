@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.types;
+package net.autumndusk.nextquarry.types;
 
 import org.bukkit.Location;
 import org.bukkit.World;

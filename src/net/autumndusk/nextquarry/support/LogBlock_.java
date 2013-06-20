@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.support;
+package net.autumndusk.nextquarry.support;
 
 import de.diddiz.LogBlock.Consumer;
 import de.diddiz.LogBlock.LogBlock;

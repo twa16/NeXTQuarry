@@ -1,7 +1,7 @@
-package net.nextbattle.quarry.entities;
+package net.autumndusk.nextquarry.entities;
 
 import java.util.ArrayList;
-import net.nextbattle.quarry.main.MainClass;
+import net.autumndusk.nextquarry.main.MainClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;

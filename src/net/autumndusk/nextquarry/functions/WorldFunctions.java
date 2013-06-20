@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.functions;
+package net.autumndusk.nextquarry.functions;
 
 import java.util.ArrayList;
 import java.util.HashSet;

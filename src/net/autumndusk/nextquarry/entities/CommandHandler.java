@@ -1,6 +1,6 @@
-package net.nextbattle.quarry.entities;
+package net.autumndusk.nextquarry.entities;
 
-import net.nextbattle.quarry.main.MainClass;
+import net.autumndusk.nextquarry.main.MainClass;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;

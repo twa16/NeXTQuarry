@@ -1,7 +1,7 @@
-package net.nextbattle.quarry.support;
+package net.autumndusk.nextquarry.support;
 
 import java.util.logging.Level;
-import net.nextbattle.quarry.main.MainClass;
+import net.autumndusk.nextquarry.main.MainClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;

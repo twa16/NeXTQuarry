@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.updater;
+package net.autumndusk.nextquarry.updater;
 
 import java.io.*;
 import java.lang.Runnable;

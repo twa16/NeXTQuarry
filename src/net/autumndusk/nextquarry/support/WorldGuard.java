@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.support;
+package net.autumndusk.nextquarry.support;
 
 import com.sk89q.worldguard.LocalPlayer;
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;

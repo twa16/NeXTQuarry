@@ -1,4 +1,4 @@
-package net.nextbattle.quarry.metrics;
+package net.autumndusk.nextquarry.metrics;
 
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -23,7 +23,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
-import net.nextbattle.quarry.entities.Quarry;
+import net.autumndusk.nextquarry.entities.Quarry;
 
 public class Metrics {
     
