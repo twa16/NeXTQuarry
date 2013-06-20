@@ -84,7 +84,7 @@ public final class MainClass extends JavaPlugin {
             }
         } catch (Exception e) {
         }
-        
+
         //Load Quarries
         File dir = new File(plugin.getDataFolder(), "/quarries");
         for (File child : dir.listFiles()) {

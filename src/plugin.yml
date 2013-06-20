@@ -1,8 +1,8 @@
 name: NeXTQuarry
 main: net.nextbattle.quarry.main.MainClass
-version: 1.5.1
+version: 1.6.1
 description: Adds quarries to vanilla minecraft
-author: BeMacized
+author: AutumnDusk
 permissions:
    nextquarry.user.*:
      description: Gives all user permissions for NeXTQuarry.
@@ -26,7 +26,6 @@ permissions:
      description: Allows the user to remove quarries.
    nextquarry.user.edit:
      description: Allows the user to edit quarries (Upgrades & Fuel).
-     
 commands:
    nextquarry:
      description: Gives info on the NextQuarry plugin.
