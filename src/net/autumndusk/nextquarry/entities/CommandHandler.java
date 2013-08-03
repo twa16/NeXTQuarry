@@ -58,8 +58,8 @@ public class CommandHandler implements CommandExecutor {
             }
 
             cs.sendMessage(ChatColor.GOLD + "----["+MainClass.lang.plugininfo+"]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.6.0 - "+MainClass.lang.codedby+" AutumnDusk");
-            cs.sendMessage(ChatColor.GOLD + MainClass.lang.website + " http://www.autumndusk.net/");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.7.0 - "+MainClass.lang.codedby+" BeMacized");
+            //cs.sendMessage(ChatColor.GOLD + MainClass.lang.website + "WEBSITEHERE");
             cs.sendMessage(ChatColor.GOLD + "BukkitDev: http://dev.bukkit.org/server-mods/nextquarry/");
             if (cs instanceof Player) {
                 Player p = (Player) cs;

@@ -1,4 +1,4 @@
-#NeXTQuarry v1.1.0 - by BeMacized - http://www.NeXTBattle.Net/
+#NeXTQuarry v1.7.0 - by BeMacized - http://dev.bukkit.org/server-mods/nextquarry/
 
 # -- CONFIG -- 
 
@@ -79,6 +79,7 @@ coreprotect-enabled: true
 logblock-enabled: true
 factions-enabled: true
 worldguard-enabled: true
+residence-enabled: true
 
 
 

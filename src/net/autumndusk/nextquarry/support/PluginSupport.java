@@ -8,10 +8,11 @@ import org.bukkit.block.Block;
 
 public class PluginSupport {
 
-    public WorldGuard wg;
-    public Factions fa;
-    public CoreProtect cp;
-    public LogBlock_ lb;
+    public PS_WorldGuard wg;
+    public PS_Factions fa;
+    public PS_CoreProtect cp;
+    public PS_LogBlock lb;
+    public PS_Residence re;
 
     public PluginSupport() {
         init();
@@ -72,31 +73,37 @@ public class PluginSupport {
 
     private void init() {
         if (Bukkit.getPluginManager().getPlugin("WorldGuard") != null && MainClass.config.worldguard_enabled) {
-            wg = new WorldGuard();
+            wg = new PS_WorldGuard();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] WorldGuard found & Attatched.");
 
         } else {
             wg = null;
         }
         if (Bukkit.getPluginManager().getPlugin("Factions") != null && MainClass.config.factions_enabled) {
-            fa = new Factions();
+            fa = new PS_Factions();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Factions found & Attatched.");
 
         } else {
             fa = null;
         }
         if (Bukkit.getPluginManager().getPlugin("CoreProtect") != null && MainClass.config.coreprotect_enabled) {
-            cp = new CoreProtect();
+            cp = new PS_CoreProtect();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] CoreProtect found & Attatched.");
 
         } else {
             cp = null;
         }
         if (Bukkit.getPluginManager().getPlugin("LogBlock") != null  && MainClass.config.logblock_enabled) {
-            lb = new LogBlock_();
+            lb = new PS_LogBlock();
             MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] LogBlock found & Attatched.");
         } else {
             lb = null;
+        }
+        if (Bukkit.getPluginManager().getPlugin("Residence") != null  && MainClass.config.residence_enabled) {
+            re = new PS_Residence();
+            MainClass.plugin.getServer().getLogger().log(Level.INFO, "[NeXTQuarry] Residence found & Attatched.");
+        } else {
+            re = null;
         }
     }
 }

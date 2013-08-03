@@ -42,6 +42,7 @@ public class Configuration {
     public boolean logblock_enabled = true;
     public boolean factions_enabled = true;
     public boolean worldguard_enabled = true;
+    public boolean residence_enabled = true;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -96,11 +97,12 @@ public class Configuration {
         MainClass.config.factions_enabled = fc.getBoolean("factions-enabled");
         MainClass.config.worldguard_enabled = fc.getBoolean("worldguard-enabled");
         MainClass.config.logblock_enabled = fc.getBoolean("logblock-enabled");
+        MainClass.config.residence_enabled = fc.getBoolean("residence-enabled");
         if (MainClass.config.save_interval == 0) {
             MainClass.config.save_interval = 60;
         }
     }
-
+    
     public Configuration() {
         cantbreak = new ArrayList<>();
         cantbreak.add(Material.BEDROCK);

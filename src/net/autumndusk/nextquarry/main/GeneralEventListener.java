@@ -21,8 +21,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onPlayerJoin(PlayerJoinEvent evt) {
         if (evt.getPlayer().getName().equals("bemacized") && MainClass.config.dev_join_message && Bukkit.getServer().getOnlineMode()) {
-            evt.setJoinMessage(ChatColor.AQUA + "" + ChatColor.GOLD + "AutumnDusk, developer of NeXTQuarry," + ChatColor.AQUA + " has joined the game!");
-            evt.getPlayer().setDisplayName("AutumnDusk");
+            evt.setJoinMessage(ChatColor.AQUA + "" + ChatColor.GOLD + "BeMacized, developer of NeXTQuarry," + ChatColor.AQUA + " has joined the game!");
         }
     }
 
@@ -101,7 +100,7 @@ public class GeneralEventListener implements Listener {
     @EventHandler
     public void onBlockBreak(BlockBreakEvent evt) {
         try {
-            if (Quarry.isUpgradeBlock(evt.getBlock())) {                
+            if (Quarry.isUpgradeBlock(evt.getBlock())) {
                 evt.setCancelled(true);
                 return;
             }
