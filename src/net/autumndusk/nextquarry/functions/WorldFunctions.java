@@ -118,5 +118,7 @@ public class WorldFunctions {
             }
         }
         } catch (Exception e) {}
+
+        chunkqueue.clear();
     }
 }
