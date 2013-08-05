@@ -133,7 +133,7 @@ public class Quarry {
     public static boolean isUpgradeBlock(Block b) {
         BlockLocation bl = new BlockLocation(b);
         for (Quarry q : quarrylist) {
-            if (q.upgrade_slot_1_bl.equals(bl) || q.upgrade_slot_2_bl.equals(bl) || q.upgrade_slot_3_bl.equals(bl)) {
+            if (bl.equals(q.upgrade_slot_1_bl) || bl.equals(q.upgrade_slot_2_bl) || bl.equals(q.upgrade_slot_3_bl)) {
                 return true;
             }
         }
@@ -413,13 +413,19 @@ public class Quarry {
 
         //Make sure quarry block is still there
         if (tier == 0) {
-            WorldFunctions.queueBlock(block.getBlock(), Material.IRON_BLOCK.getId(), (byte) 0);
+            if (!block.getBlock().getType().equals(Material.IRON_BLOCK)) {
+                WorldFunctions.queueBlock(block.getBlock(), Material.IRON_BLOCK.getId(), (byte) 0);
+            }
         }
         if (tier == 1) {
-            WorldFunctions.queueBlock(block.getBlock(), Material.GOLD_BLOCK.getId(), (byte) 0);
+            if (!block.getBlock().getType().equals(Material.GOLD_BLOCK)) {
+                WorldFunctions.queueBlock(block.getBlock(), Material.GOLD_BLOCK.getId(), (byte) 0);
+            }
         }
         if (tier == 2) {
-            WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
+            if (!block.getBlock().getType().equals(Material.OBSIDIAN)) {
+                WorldFunctions.queueBlock(block.getBlock(), Material.OBSIDIAN.getId(), (byte) 0);
+            }
         }
 
         //Reset upgrade slots
@@ -470,16 +476,23 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 1, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_1 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_1_bl = bl;
+
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 2, block.getY(), block.getZ(), block.getWorld());
         }
@@ -492,16 +505,23 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 2, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_2 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_2_bl = bl;
+
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 3, block.getY(), block.getZ(), block.getWorld());
         }
@@ -514,13 +534,19 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 3, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_3 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_3_bl = bl;
@@ -1117,20 +1143,21 @@ public class Quarry {
 
     public boolean containsBlock(Block b) {
         boolean contains = false;
+        BlockLocation bl = new BlockLocation(b);
         try {
             for (BlockLocation f : QuarryBlocks) {
-                if (f.equals(new BlockLocation(b))) {
+                if (f.equals(bl)) {
                     contains = true;
                 }
             }
             for (BlockLocation f : ArmBlocks) {
-                if (f.equals(new BlockLocation(b))) {
+                if (f.equals(bl)) {
                     contains = true;
                 }
             }
         } catch (Exception e) {
         }
-        if (block.equals(new BlockLocation(b))) {
+        if (block.equals(bl)) {
             contains = true;
         }
         return contains;
