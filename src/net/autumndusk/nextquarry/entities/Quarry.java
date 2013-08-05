@@ -470,16 +470,23 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 1, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_1 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_1_bl = bl;
+
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 2, block.getY(), block.getZ(), block.getWorld());
         }
@@ -492,16 +499,23 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 2, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_2 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_2_bl = bl;
+
         if (dir == BlockFace.WEST || dir == BlockFace.NORTH_WEST) {
             bl = new BlockLocation(block.getX() - 3, block.getY(), block.getZ(), block.getWorld());
         }
@@ -514,13 +528,19 @@ public class Quarry {
         if (dir == BlockFace.EAST || dir == BlockFace.SOUTH_EAST) {
             bl = new BlockLocation(block.getX() + 3, block.getY(), block.getZ(), block.getWorld());
         }
-        WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
+
         if (upgrade_slot_3 == 1) {
-            WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
-            BlockState bs = bl.getBlock().getState();
-            if (bs instanceof Furnace) {
-                Furnace furnace = (Furnace) bs;
-                furnace.setFacingDirection(dir);
+            if (!bl.getBlock().getType().equals(Material.FURNACE)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.FURNACE.getId(), (byte) 0);
+                BlockState bs = bl.getBlock().getState();
+                if (bs instanceof Furnace) {
+                    Furnace furnace = (Furnace) bs;
+                    furnace.setFacingDirection(dir);
+                }
+            }
+        } else {
+            if (!bl.getBlock().getType().equals(Material.AIR)) {
+                WorldFunctions.queueBlock(bl.getBlock(), Material.AIR.getId(), (byte) 0);
             }
         }
         upgrade_slot_3_bl = bl;
