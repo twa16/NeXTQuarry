@@ -1143,20 +1143,21 @@ public class Quarry {
 
     public boolean containsBlock(Block b) {
         boolean contains = false;
+        BlockLocation bl = new BlockLocation(b);
         try {
             for (BlockLocation f : QuarryBlocks) {
-                if (f.equals(new BlockLocation(b))) {
+                if (f.equals(bl)) {
                     contains = true;
                 }
             }
             for (BlockLocation f : ArmBlocks) {
-                if (f.equals(new BlockLocation(b))) {
+                if (f.equals(bl)) {
                     contains = true;
                 }
             }
         } catch (Exception e) {
         }
-        if (block.equals(new BlockLocation(b))) {
+        if (block.equals(bl)) {
             contains = true;
         }
         return contains;
