@@ -71,8 +71,4 @@
     nbproject/build-impl.xml file. 
 
     -->
-    
-    <target name="-post-jar">
-    <copy file="${dist.jar}" flatten="true" todir="C:\Development\Bukkit-Development\test-server\plugins" />
-    </target>
 </project>

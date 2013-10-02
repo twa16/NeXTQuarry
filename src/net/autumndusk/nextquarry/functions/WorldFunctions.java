@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import net.minecraft.server.v1_6_R2.ChunkCoordIntPair;
-import net.minecraft.server.v1_6_R2.EntityPlayer;
+import net.minecraft.server.v1_6_R3.ChunkCoordIntPair;
+import net.minecraft.server.v1_6_R3.EntityPlayer;
 import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.craftbukkit.v1_6_R2.CraftChunk;
-import org.bukkit.craftbukkit.v1_6_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_6_R3.CraftChunk;
+import org.bukkit.craftbukkit.v1_6_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 public class WorldFunctions {
@@ -48,7 +48,7 @@ public class WorldFunctions {
 
     public static void queueBlock(Block b, int typeId, byte data) {
         Chunk c = b.getChunk();
-        net.minecraft.server.v1_6_R2.Chunk chunk = ((CraftChunk) c).getHandle();
+        net.minecraft.server.v1_6_R3.Chunk chunk = ((CraftChunk) c).getHandle();
         chunk.a(b.getX() & 15, b.getY(), b.getZ() & 15, typeId, data);
         if (!chunkqueue.contains(c)) {
             chunkqueue.add(c);
