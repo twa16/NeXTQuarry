@@ -43,6 +43,7 @@ public class Configuration {
     public boolean factions_enabled = true;
     public boolean worldguard_enabled = true;
     public boolean residence_enabled = true;
+    public boolean particles_enabled = true;
 
     public static void loadConfig() {
         FileConfiguration fc = new YamlConfiguration().loadConfiguration(new File(MainClass.plugin.getDataFolder(), "config.yml"));
@@ -98,6 +99,7 @@ public class Configuration {
         MainClass.config.worldguard_enabled = fc.getBoolean("worldguard-enabled");
         MainClass.config.logblock_enabled = fc.getBoolean("logblock-enabled");
         MainClass.config.residence_enabled = fc.getBoolean("residence-enabled");
+        MainClass.config.particles_enabled = fc.getBoolean("particles-enabled");
         if (MainClass.config.save_interval == 0) {
             MainClass.config.save_interval = 60;
         }

@@ -746,8 +746,10 @@ public class Quarry {
             if (MainClass.ps.mayEditBlock(getBlockAtSpot(xwork, ywork, zwork), playername)) {
                 WorldFunctions.queueBlock(getBlockAtSpot(xwork, ywork, zwork), Material.AIR.getId(), (byte) 0);
                 MainClass.ps.logRemoval(playername, getBlockAtSpot(xwork, ywork, zwork).getLocation(), getBlockAtSpot(xwork, ywork, zwork).getTypeId(), getBlockAtSpot(xwork, ywork, zwork).getData());
-                Packet61WorldEvent packet = new Packet61WorldEvent(2001, getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockX(), getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockY(), getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockZ(), getBlockAtSpot(xwork, ywork, zwork).getType().getId(), false);
-                ((CraftServer) Bukkit.getServer()).getHandle().sendPacketNearby(getBlockAtSpot(xwork, ywork, zwork).getX(), getBlockAtSpot(xwork, ywork, zwork).getY(), getBlockAtSpot(xwork, ywork, zwork).getZ(), 20.0d, ((CraftWorld) getBlockAtSpot(xwork, ywork, zwork).getWorld()).getHandle().dimension, packet);
+                if (MainClass.config.particles_enabled) {
+                    Packet61WorldEvent packet = new Packet61WorldEvent(2001, getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockX(), getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockY(), getBlockAtSpot(xwork, ywork, zwork).getLocation().getBlockZ(), getBlockAtSpot(xwork, ywork, zwork).getType().getId(), false);
+                    ((CraftServer) Bukkit.getServer()).getHandle().sendPacketNearby(getBlockAtSpot(xwork, ywork, zwork).getX(), getBlockAtSpot(xwork, ywork, zwork).getY(), getBlockAtSpot(xwork, ywork, zwork).getZ(), 20.0d, ((CraftWorld) getBlockAtSpot(xwork, ywork, zwork).getWorld()).getHandle().dimension, packet);
+                }
             } else {
                 return false;
             }
