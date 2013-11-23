@@ -697,6 +697,9 @@ public class Quarry {
         }
         Location loc2 = block.getLocation();
         loc2.add(0, 1, 0);
+        if (ywork < MainClass.config.miny) {
+            return false;
+        }
         BlockState blockState = block.getWorld().getBlockAt(loc2).getState();
         if (blockState instanceof Chest && !MainClass.config.cantbreak.contains(getBlockAtSpot(xwork, ywork, zwork).getType())) {
             Chest chest = (Chest) blockState;

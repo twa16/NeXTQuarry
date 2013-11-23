@@ -38,6 +38,7 @@ public class Configuration {
     public int tier_1_size = 16;
     public int tier_2_size = 32;
     public int tier_3_size = 48;
+    public int miny = 0;
     public boolean coreprotect_enabled = true;
     public boolean logblock_enabled = true;
     public boolean factions_enabled = true;
@@ -100,10 +101,12 @@ public class Configuration {
         MainClass.config.logblock_enabled = fc.getBoolean("logblock-enabled");
         MainClass.config.residence_enabled = fc.getBoolean("residence-enabled");
         MainClass.config.particles_enabled = fc.getBoolean("particles-enabled");
+        MainClass.config.miny = fc.getInt("minimum-y");
         if (MainClass.config.save_interval == 0) {
             MainClass.config.save_interval = 60;
         }
     }
+    
     
     public Configuration() {
         cantbreak = new ArrayList<>();

@@ -1,5 +1,6 @@
 package net.autumndusk.nextquarry.main;
 
+import java.util.List;
 import net.autumndusk.nextquarry.entities.CustomItems;
 import net.autumndusk.nextquarry.entities.Quarry;
 import net.autumndusk.nextquarry.functions.WorldFunctions;
@@ -12,9 +13,14 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.Recipe;
+import org.bukkit.inventory.ShapedRecipe;
 
 public class GeneralEventListener implements Listener {
 
@@ -23,6 +29,33 @@ public class GeneralEventListener implements Listener {
         if (evt.getPlayer().getName().equals("bemacized") && MainClass.config.dev_join_message && Bukkit.getServer().getOnlineMode()) {
             evt.setJoinMessage(ChatColor.AQUA + "" + ChatColor.GOLD + "BeMacized, developer of NeXTQuarry," + ChatColor.AQUA + " has joined the game!");
         }
+    }
+    
+    @EventHandler
+    public void onChooseItemInCraftingMenu(InventoryClickEvent evt) {
+        if (evt.getInventory().getType().equals(InventoryType.WORKBENCH) && evt.getInventory().getHolder() == null) {
+            evt.setCancelled(true);
+            evt.setCursor(null);
+            evt.getWhoClicked().closeInventory();
+        }
+        if (evt.getInventory().getName().equals("NeXTQuarry Crafting") && evt.getInventory().getItem(evt.getRawSlot()) != null) {
+            evt.setCancelled(true);
+            List<Recipe> recipesFor = Bukkit.getServer().getRecipesFor(evt.getInventory().getItem(evt.getRawSlot()));
+            ShapedRecipe r = MainClass.citems.recipes.get(evt.getInventory().getItem(evt.getRawSlot()));
+            Inventory inv = Bukkit.createInventory(null, InventoryType.WORKBENCH);
+            inv.setItem(0, evt.getInventory().getItem(evt.getRawSlot()));
+            int i = 1;
+            for (String row : r.getShape()) {
+                for (Character c : row.toCharArray())
+                {
+                    inv.setItem(i, r.getIngredientMap().get(c));
+                    i++;
+                }
+            }            
+            evt.getWhoClicked().openInventory(inv);
+            if (evt.getWhoClicked() instanceof Player) { ((Player)evt.getWhoClicked()).updateInventory(); }
+        }
+        
     }
 
     @EventHandler

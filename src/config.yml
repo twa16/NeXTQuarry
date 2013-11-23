@@ -27,6 +27,8 @@ user-max-tier-2-quarries: 8
 user-max-tier-3-quarries: 8
 #User max quarries: The maximum amount of quarries a user can place. This should probably be equal to the sum of the limit of tiers (tier1 + tier2 + tier3)
 user-max-quarries: 24
+#Minimum y: The minimum block level a quarry can dig (0 = everything, 64 = 0-63 unminable)
+minimum-y: 0
 
 # -- PLUGIN OPTIONS --
 #Auto Update: Makes sure the plugin updates automatically when there's an update available.

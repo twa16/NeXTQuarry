@@ -1,6 +1,6 @@
 name: NeXTQuarry
 main: net.autumndusk.nextquarry.main.MainClass
-version: 1.7.2
+version: 1.8.0
 description: Adds quarries to vanilla minecraft
 author: BeMacized
 permissions:

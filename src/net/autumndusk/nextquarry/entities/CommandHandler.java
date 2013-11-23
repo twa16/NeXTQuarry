@@ -1,64 +1,58 @@
 package net.autumndusk.nextquarry.entities;
 
 import net.autumndusk.nextquarry.main.MainClass;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 public class CommandHandler implements CommandExecutor {
 
     @Override
     public boolean onCommand(CommandSender cs, Command cmnd, String string, String[] args) {
         if (cmnd.getName().equalsIgnoreCase("nextquarry")) {
-            if (args.length == 1 && args[0].equals("give")) {
-                cs.sendMessage(ChatColor.GOLD + MainClass.lang.itemlist + " tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
-                return true;
-            }
-            if (args.length == 2 && args[0].equals("give")) {
+            if (args.length == 1 && args[0].equals("items")) {
                 if (!(cs instanceof Player)) {
                     cs.sendMessage(ChatColor.GOLD + MainClass.lang.noconsole);
                     return false;
                 }
-                
                 Player p = (Player) cs;
-
                 if (!p.hasPermission("nextquarry.admin")) {
                     cs.sendMessage(ChatColor.GOLD + MainClass.lang.nogiveperm);
                     return true;
                 }
-                if (args[1].equals("tier1")) {
-                    p.getInventory().addItem(MainClass.citems.quarry_tier1);
-                } else if (args[1].equals("tier2")) {
-                    p.getInventory().addItem(MainClass.citems.quarry_tier2);
-                } else if (args[1].equals("tier3")) {
-                    p.getInventory().addItem(MainClass.citems.quarry_tier3);
-                } else if (args[1].equals("wrench")) {
-                    p.getInventory().addItem(MainClass.citems.wrench_tool);
-                } else if (args[1].equals("speedupgrade")) {
-                    p.getInventory().addItem(MainClass.citems.speed_upgrade);
-                } else if (args[1].equals("fuelinjector")) {
-                    p.getInventory().addItem(MainClass.citems.fuel_tool);
-                } else if (args[1].equals("fuelfinder")) {
-                    p.getInventory().addItem(MainClass.citems.fuel_finder_upgrade);
-                } else if (args[1].equals("chestminer")) {
-                    p.getInventory().addItem(MainClass.citems.chest_miner);
-                }else if (args[1].equals("smelter")) {
-                    p.getInventory().addItem(MainClass.citems.smelter_upgrade);
-                } else if (args[1].equals("fuelupgrade")) {
-                    p.getInventory().addItem(MainClass.citems.fuel_efficiency_upgrade);
-                }  else if (args[1].equals("liquidminer")) {
-                    p.getInventory().addItem(MainClass.citems.liquid_miner);
-                } else {
-                    p.sendMessage(ChatColor.GOLD + MainClass.lang.itemnoexist);
-                    p.sendMessage(ChatColor.GOLD + MainClass.lang.itemlist+ " tier1, tier2, tier3, wrench, speedupgrade, fuelinjector, fuelfinder, fuelupgrade, smelter, liquidminer & chestminer.");
+                Inventory inv = Bukkit.createInventory(null, 18, "NeXTQuarry Items");
+                for (ItemStack is : MainClass.citems.items) {
+                    inv.addItem(is);
                 }
+                p.openInventory(inv);
+                return true;
+            }
+            
+            if (args.length == 1 && args[0].equals("craft")) {
+                if (!(cs instanceof Player)) {
+                    cs.sendMessage(ChatColor.GOLD + MainClass.lang.noconsole);
+                    return false;
+                }
+                Player p = (Player) cs;
+                if (!p.hasPermission("newxtquarry.admin")) {
+                    cs.sendMessage(ChatColor.GOLD + MainClass.lang.nogiveperm);
+                    return true;
+                }
+                Inventory inv = Bukkit.createInventory(null, 18, "NeXTQuarry Crafting");
+                for (ItemStack is : MainClass.citems.items) {
+                    inv.addItem(is);
+                }
+                p.openInventory(inv);
                 return true;
             }
 
             cs.sendMessage(ChatColor.GOLD + "----["+MainClass.lang.plugininfo+"]----");
-            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.7.2 - "+MainClass.lang.codedby+" BeMacized");
+            cs.sendMessage(ChatColor.GOLD + "NeXTQuarry v1.8.0 - "+MainClass.lang.codedby+" BeMacized");
             //cs.sendMessage(ChatColor.GOLD + MainClass.lang.website + "WEBSITEHERE");
             cs.sendMessage(ChatColor.GOLD + "BukkitDev: http://dev.bukkit.org/server-mods/nextquarry/");
             if (cs instanceof Player) {
