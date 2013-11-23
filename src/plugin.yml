@@ -13,6 +13,7 @@ permissions:
             nextquarry.user.tier3: true
             nextquarry.user.remove: true
             nextquarry.user.edit: true
+            nextquarry.user.craft: true
    nextquarry.admin:
      description: Gives admin permissions for NeXTQuarry.
      default: op
@@ -23,7 +24,7 @@ permissions:
    nextquarry.user.tier3:
      description: Allows the user to place tier 3 quarries.
    nextquarry.user.remove:
-     description: Allows the user to remove quarries.
+     description: Allows the user to remove(dumb) quarries.
    nextquarry.user.edit:
      description: Allows the user to edit quarries (Upgrades & Fuel).
 commands:

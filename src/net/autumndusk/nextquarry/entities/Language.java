@@ -28,6 +28,8 @@ public class Language {
     public String codedby = "Coded by";
     public String website = "Website:";
     public String perms = "NeXTQuarry Permissions";
+    public String craftallow="You are allowed to use /nextquarry craft";
+    public String craftdeny="You are NOT allowed to use /nextquarry craft";
     public String tier1allow = "You are allowed to place tier 1 quarries.";
     public String tier1deny = "You are NOT allowed to place tier 1 quarries.";
     public String tier2allow = "You are allowed to place tier 2 quarries.";
@@ -132,5 +134,7 @@ public class Language {
         MainClass.lang.tier3deny = fc.getString("tier3deny");
         MainClass.lang.upgr_bay = fc.getString("upgr_bay");
         MainClass.lang.website = fc.getString("website");
+        MainClass.lang.craftallow = fc.getString("craftallow");
+        MainClass.lang.craftdeny = fc.getString("craftdeny");
     }
 }

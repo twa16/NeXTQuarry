@@ -39,7 +39,7 @@ public class CommandHandler implements CommandExecutor {
                     return false;
                 }
                 Player p = (Player) cs;
-                if (!p.hasPermission("newxtquarry.admin")) {
+                if (!p.hasPermission("newxtquarry.user.craft")) {
                     cs.sendMessage(ChatColor.GOLD + MainClass.lang.nogiveperm);
                     return true;
                 }
@@ -72,6 +72,11 @@ public class CommandHandler implements CommandExecutor {
                     cs.sendMessage(ChatColor.GREEN + MainClass.lang.tier3allow);
                 } else {
                     cs.sendMessage(ChatColor.RED + MainClass.lang.tier3deny);
+                }
+                 if (p.hasPermission("nextquarry.user.craft")) {
+                    cs.sendMessage(ChatColor.GREEN + MainClass.lang.craftallow);
+                } else {
+                    cs.sendMessage(ChatColor.RED + MainClass.lang.craftdeny);
                 }
                 if (MainClass.config.privatequarries) {
                     if (p.hasPermission("nextquarry.admin")) {
